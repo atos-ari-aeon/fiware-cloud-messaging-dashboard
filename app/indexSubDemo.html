@@ -1,0 +1,215 @@
+<!-- /**
+    Copyright (C) 2014 ATOS
+ 
+    This file is part of AEON.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  
+    Authors: Javier García Hernández (javier.garcia@atos.net)
+             Baris Kara (baris.kara@atos.net)
+
+  
+  */ -->
+
+<!doctype html>
+<html lang="en" ng-app="SUBAPP">
+<head> 
+  <title>AEON Sub Demo</title>
+  <meta charset="UTF-8"/>
+  <meta name="description" content="AEON">
+  <meta name="author" content="ATOS S.A.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css"> 
+  <link rel="stylesheet" type="text/css" href="css/style.css">     
+  <link rel="stylesheet" type="text/css" href="css/navbar.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">  
+  <link rel="stylesheet" type="text/css" href="subAppCss/subApp.css">   
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-resource.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-cookies.js"></script>  
+  <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.4.0.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script src="controllers/app.js"></script>  
+  <script src="controllers/config.js"></script>  
+  <script src="controllers/services.js"></script>
+  
+  <script src="subAppControllers/subAppCtrl.js"></script>
+  <!--<script src="subAppControllers/loadLibraries.js"></script>-->
+
+  <!--<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>-->
+  <script src="subAppLibs/angular-google-maps.js"></script>  
+  <script src="libs/aeonSDK.js"></script> 
+  <script src="libs/socket.io.js"></script>
+    
+    
+  <link rel="stylesheet" type="text/css" href="libs/codemirror/lib/codemirror.css">
+
+  <script type="text/javascript" src="libs/codemirror/lib/codemirror.js"></script>
+  <!--<script type="text/javascript" src="libs/angular/angular.js"></script>-->
+  <script type="text/javascript" src="libs/angular-ui-codemirror/ui-codemirror.js"></script>
+
+
+<script src="libs/codemirror/mode/xml/xml.js"></script>
+<script src="libs/codemirror/mode/javascript/javascript.js"></script>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.2.1/moment.min.js"></script> 
+
+  <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfjforlY6z45r0kEk9Z1nxqEqRDqaPlSc&sensor=true">
+    </script>
+
+  <style type="text/css">
+      body {
+        padding-top: 60px;
+      }
+      
+    </style>
+
+</head>
+<body>
+
+     <nav id="navbar-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="row">
+        <div class="navbar-header col-md-12">          
+          <div class="col-md-4 col-sm-5 col-xs-5">
+            <a class="nav-link" href="#top"><img class="web-logo" src="img/web_header.png"/></a>
+          </div>
+          <!-- /.navbar-header -->
+          <div  class="col-md-4 col-sm-7 col-xs-7" style="text-align:center; color:#255A75;">
+            <h4>AEON SUBSCRIPTION DEMONSTRATOR</h4>
+          </div>
+        </div> <!-- /.navbar-header -->        
+      </div> <!-- /.container -->
+    </nav> <!-- /.navbar -->
+
+    <div class="container" style="padding-top:5%;">
+      <div class="row">
+        <div class="col-md-5 ">
+          <div class="well sidebar-nav cardChannel" ng-controller="configCtrl">
+            <ul class="nav nav-list" >
+              <li class="nav-header nav-header-snippet">Subscribe to channel</li>         
+            </ul>
+            <div ng-repeat="subscriptions in subscriptionFields">
+                
+            <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6" style="margin-left:-3%;">
+              <select class="form-control nullable char-color-blue" style="color: #255A75;" ng-disabled="channelSelectorDisabled[$index]"  ng-model="subscriptionURL[$index]"  ng-options="value.name for value in channelsAvailables">
+                <option value="" class="char-color-blue">-- Choose a channel --</option>
+              </select>   
+            </div>
+            
+<!--              <input type="text" class="form-control" style="width:50%; display:inline;" ng-readonly="isReadOnly($index)" ng-model="subscriptionURL[$index]" placeholder="Enter subscription url"></input>-->
+              <button class="btn btn-lightBlue btn-medium" ng-disabled="startButtonDisabled[$index]" ng-show="startButtonShown[$index]" ng-click="submitURL($index)">Start</button> 
+              <button class="btn btn-lightBlue btn-medium" ng-show="pauseButtonShown[$index]" ng-click="pauseURL($index)">Pause</button>  
+              <button class="btn btn-primary btn-medium" ng-show="continueButtonShown[$index]" ng-click="continueURL($index)">Continue</button>               
+              <button class="btn btn-danger btn-medium" ng-disabled="stopButtonDisabled[$index]" ng-click="stopURL($index)">Stop</button>
+              <br>      
+              <label class="wordWrap nav-header-snippet" style="text-transform:none;" ng-show="subURLLabel[$index]"  >  {{ subscriptionURL[$index].shortSubURL }}</label>
+              <label class="alert alert-danger alertConfig card-margin-top" ng-show="notAttached[$index]" >Please, select subscription url</label>
+                <label class="alert alert-danger alertConfig" ng-show="notReachable">Server unreachable. Please, contact the administrator.</label>
+              <div ng-show="showControlMessage[$index]">                
+                <label class="wordWrap codeFormat-{{messageColor[$index]}}"> {{controlReceivedMessage[$index]}} </label>
+              </div>  
+              <br>            
+            </div>
+            <div id="addRemChannels">
+              <button id="addChannel" class="btn btn-success btn-medium" type="button" ng-disabled="addChannelDisabled" ng-click="addChannel()">Add Sub Channel</button>
+              <button class="btn btn-black btn-alert" type="button" ng-disabled="removeChannelDisabled" ng-click="removeChannel()">Remove Sub Channel</button>                        
+            </div>
+            <br>
+            <br>
+            <!-- <div ng-show="startSub">
+              <ul class="nav nav-list" >
+                <li class="nav-header">Subscribed URL</li>         
+              </ul>
+              <div class="snippet">
+                <code class="wordWrap codeFormat-Green">{{subscriptionURL}}</code>
+              </div>
+            </ div>-->
+
+            
+
+<!--            <div ng-show="showMessage">-->
+            <div >
+              <ul class="nav nav-list" >
+                <li class="nav-header nav-header-snippet">Last Message Received</li>         
+              </ul>
+              <div class="cardChannel" style="padding: 1px; margin-bottom:3%;">
+                 <div  ui-codemirror="{{cmCodeJSON}}"  ng-model="codeContentJSON" style="height:auto;margin-left:3%; background-color:#FAFAFA; ">
+                 </div>
+
+                  <div ng-show="showMessage">
+                    <img src="img/selftimer.png" id="position-gen-img" style="width:24px; height:24px;">
+                    <label class="wordWrap codeFormat-Blue">{{timeOfArrival}} milliseconds</label>
+                   </div>
+              </div>
+            </div>
+
+<!--
+            <div ng-show="showMessage">
+              <ul class="nav nav-list" >
+                <li class="nav-header nav-header-snippet">Last Message Received in</li>         
+              </ul>
+              <div class="cardChannel">
+                <label class="wordWrap codeFormat-Blue">{{timeOfArrival}} milliseconds</label>
+              </div>
+            </div>
+-->
+
+            <ul class="nav nav-list" >
+              <li class="nav-header nav-header-snippet">Code Snippet</li>         
+            </ul>
+            <div  class="cardChannel" style="padding: 1px; margin-bottom:3%;">      
+                <div ui-codemirror="{{cmCodeHTML}}" ng-model="codeContentHTML" style="height:auto;  background-color: #fff;">
+                 </div>
+            </div>
+              
+            <div  class="cardChannel" style="padding: 1px; margin-bottom:3%;">      
+                <div ui-codemirror="{{cmCodeJS}}" ng-model="codeContentJS" style="height:auto;  background-color: #fff;">
+                 </div>
+            </div>
+          
+          </div><!--/.well -->
+        </div><!--/span-->
+       
+       <div class="col-md-7">
+          <div class="row">
+            <div class="col-md-12" ng-controller="mapCtrl">
+              <!--<div class="google-map"
+                center="position.coords"
+                zoom="zoomProperty" 
+                markers="markers"
+                latitude="clickedLatitudeProperty"
+                longitude="clickedLongitudeProperty"
+                mark-click="false"
+                draggable="true"
+                fit="false"
+                events="eventsProperty"
+                refresh="isRefresh"
+                style="height: 580px; width: 100%">
+              </div>-->
+              <div id="map-canvas"></div>
+            </div>  
+          </div>
+       </div>
+    </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="libs/bootstrap/js/bootstrap.js"></script>
+   
+
+</body>
+</html>

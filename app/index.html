@@ -1,0 +1,106 @@
+<!-- /**
+    Copyright (C) 2014 ATOS
+ 
+    This file is part of AEON.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  
+    Authors: Javier García Hernández (javier.garcia@atos.net)
+             Baris Kara (baris.kara@atos.net)
+
+  
+  */ -->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="AEON">
+<head> 
+	<title>AEON</title>
+	<meta charset="UTF-8"/>
+	<meta name="description" content="AEON">
+  <meta name="author" content="ATOS S.A.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+  
+  <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">	
+  
+  <link rel="stylesheet" type="text/css" href="css/style.css">     
+  <link rel="stylesheet" type="text/css" href="css/navbar.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href="css/animate.css"> 
+  <link rel="stylesheet" type="text/css" href="css/lighter.css">
+  <link rel="stylesheet" type="text/css" href="libs/toastr/toastr.css">  
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/favicon.ico">   
+
+  <!-- Apple Touch Icons -->    
+  <link rel="apple-touch-icon" href="img/isotype57_Rounded.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="img/isotype72_Rounded.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="img/isotype114_Rounded.png" /> 
+  <link rel="apple-touch-icon" sizes="144x144" href="img/isotype144_Rounded.png" />
+  <link href="libs/angular-xeditable-0.1.8/css/xeditable.css" rel="stylesheet">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-resource.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-cookies.js"></script>  
+  <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>  
+  <script type="text/javascript" src="//www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+  <script src="libs/angular-recaptcha.js"></script>
+  <script src="libs/jquery.cookie.js"></script>
+  <script src="libs/angular-xeditable-0.1.8/js/xeditable.js"></script>
+  <script src="libs/toastr/toastr.min.js"></script>
+  <script src="libs/angular-gravatar/src/md5.js"></script>
+  <script src="libs/angular-gravatar/build/angular-gravatar.js"></script>
+ 
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfjforlY6z45r0kEk9Z1nxqEqRDqaPlSc&sensor=true"></script>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.2.1/moment.min.js"></script>
+  <script type="text/javascript" src="libs/Base64Encoder.js"></script>
+
+  <script src="controllers/app.js"></script>  
+  <script src="controllers/directives.js"></script> 
+  <script src="controllers/config.js"></script>
+  <script src="controllers/loginCtrl.js"></script>
+  <script src="controllers/main.js"></script>
+  <script src="controllers/services.js"></script>
+  <script src="controllers/userManagementCtrl.js"></script>
+  <script src="controllers/aboutCtrl.js"></script>
+  <script src="controllers/entitiesCtrl.js"></script>
+  <script src="libs/aeonSDK.js"></script>
+  <script src="libs/socket.io.js"></script>
+
+  
+  <script src="libs/qr.js"></script>  
+
+  <style type="text/css">
+      body {
+        padding-top: 60px;        
+      }
+
+    </style>
+
+</head>
+<body>
+
+    <div ng-view>
+
+    </div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="libs/bootstrap/js/bootstrap.js"></script>
+   
+</body>
+</html>

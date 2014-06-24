@@ -1,0 +1,237 @@
+ <!--/**
+    Copyright (C) 2014 ATOS
+ 
+    This file is part of AEON.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  
+    Authors: Javier García Hernández (javier.garcia@atos.net)
+             Baris Kara (baris.kara@atos.net)
+
+  
+  */ -->
+
+<div class="col-md-12">    
+<h2 class="char-color-blue">Entities</h2>
+<div class="row" ng-controller="entitiesCtrl">  
+   
+  <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12" ng-class="getCardClass(entity, 'new')" id="tarjeta-{{$index}}" ng-repeat="entity in entities">
+      
+    <div class="row"> 
+      <div class="col-md-10">
+          <a href="#" class="h4 char-color-blue" style="color: #255A75;" onbeforesave="updateEntity($data, 'NAME', $index, entity)" editable-text="entity.entityname">{{ (entity.entityname || "empty") | uppercase }}</a>
+      </div>
+      <div class="col-md-2" style="position:absolute; top:3%; right:1%;">
+        <div class="remove-btn">
+          <a class ="btn remove-icon-big" href="" ng-click="deleteEntity(entity, $index)"><i class="glyphicon glyphicon-remove" ></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 card-margin-top">
+         <a href="#" class="p char-color-blue" style="color: #255A75;" onbeforesave="updateEntity($data, 'DESC', $index, entity)" editable-text="entity.entitydescription">{{ entity.entitydescription || "empty" }}</a>
+      </div>
+      <div class="error-info card-margin-top" ng-show="entity.entityError">A problem occured, we cannot achieve this operation currently.</div>
+      <div class="error-info card-margin-top" ng-show="entity.authorizationError">You are not authorized for this operation</div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-md-12 card-margin-top">
+        <div class="row">
+          <div class="col-md-12">
+            <p class="char-color-blue" style="color: #255A75;"><b>Channels</b></p>  
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-7 col-sm-9 col-xs-6">
+            <select class="form-control nullable char-color-blue" style="color: #255A75;" ng-model="selectedChannel[$index]" ng-change="getEntityIndex($index)" ng-options="value.channelname for value in entity.channels">
+              <option value="" class="char-color-blue">-- Choose a channel --</option>
+              </select>
+          </div>
+           <div class="col-md-5 col-sm-3 col-xs-6" id="newChannelButton" style="text-align:right;">
+              <button class="btn btn-lightBlue btn-medium"  ng-show="isOldCard(entity)" ng-click="addNewChannel(entity, $index)" title="Add Channel">New Channel</button>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-12 card-margin-top">
+            <div ng-show="!isNewCard(entity)">
+              <div class="cardChannel" ng-show="entity.addingChannel">
+                <div class="row card-margin-top">
+                  <div class="col-md-12">
+                    <input type="text" class="form-control char-color-blue" style="color: #255A75;" ng-model="channelname[$index]" placeholder="Channel Name"></input>
+                  </div>
+                </div>                
+                <div class="row card-margin-top">
+                  <div class="col-md-12">
+                    <input type="text" class="form-control" ng-model="channeldescription[$index]" placeholder="Channel Description"></input>
+                  </div>
+                </div>
+                <div class="row card-margin-top">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <button class="btn btn-sm btn-lightBlue" style="margin-left:5px;" ng-click="saveChannel($index,entity)">Save</button>
+                    <button class="btn btn-sm btn-black" ng-click="cancelChannel(entity,$index)">Cancel</button>
+                  </div>                 
+                </div>               
+              </div>
+            </div>
+
+            <div class="row cardChannel channel-padding" ng-show="showChannelInfo[$index]">
+              <div class="col-md-12">              
+                <div class="row"> 
+                  <div class="col-md-10">
+                      <a href="#" class="p char-color-blue" style="color: #255A75;" onbeforesave="updateChannel($data, 'NAME', $index, channelInfo[$index])" editable-text="channelInfo[$index].channelname">{{ (channelInfo[$index].channelname || "empty" | uppercase)}}</a>
+                  </div>
+                  <div class="col-md-2 remove-btn-channel">                   
+                    <a class ="btn remove-icon-extrasmall" href="" ng-click="deleteChannel()"><i class="glyphicon glyphicon-remove"></i></a></i></a>                  
+                  </div>
+                </div>             
+
+                <div class="row">
+                  <div class="col-md-12 card-margin-top">
+                    <a href="#" class="p char-color-blue" style="color: #255A75;" onbeforesave="updateChannel($data, 'DESC', $index, channelInfo[$index])" editable-text="channelInfo[$index].channeldesc">{{ channelInfo[$index].channeldesc || "empty" }}</a>
+                    
+                    <div class="error-info" ng-show="channelInfo[$index].channelError">A problem occured, we cannot achieve this operation currently</div>
+                    <div class="error-info" ng-show="channelInfo[$index].authorizationError">You are not authorized for this operation</div>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-12 card-margin-top">
+                    <tabset>
+                      <tab heading="Publication">
+                        <input type="text" class="form-control char-color-blue" style="margin-top:10px;" ng-model="channelInfo[$index].puburl" readonly></input>                                                                         
+                      </tab>
+                      <tab heading="Subscription">
+                        <input type="text" class="form-control char-color-blue" style="margin-top:10px;" ng-model="channelInfo[$index].subscriptionsurl" readonly></input>                                                    
+                      </tab>                         
+                    </tabset>  
+                  </div>
+                </div>   
+              </div>                           
+            </div>
+          </div>
+        </div>        
+      </div>
+    </div>
+  </div><!--end of ng-repeat-->
+
+  <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 animated fadeInUpBig new-panel" id="tarjeta-{{entities.length}}">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="new-card">          
+          <a href="" class="panel centerStyle card-btn" ng-show="!newCardClicked" ng-click="showNewEntityCard()">
+              <div class="blue-bg user-heading">
+                  <i class="fa fa-plus"></i>
+              </div>
+              <div class="item-lower">
+                  <div class="description">
+                    New Entity
+                  </div>
+              </div>
+          </a>
+          <!--If is a new card, these fields will be shown and the other will be hidden.-->
+          <div ng-show="newCardClicked" class="card">                      
+            <div class="row card-margin-top">
+              <div class="col-md-12">
+                <input type="text" ng-model="newCardEntity.entityname" class="form-control input-md" placeholder="Entity Name"></input>
+              </div>
+            </div>
+            <div class="row card-margin-top">
+              <div class="col-md-12">
+                <input type="text" ng-model="newCardEntity.entitydescription" class="form-control input-md" placeholder="Entity Description"></input>
+              </div>
+            </div>
+            <div class="row card-margin-top">
+              <div class="col-md-12">
+                <div class="alert alert-danger" ng-show="newCardEntity.entityEmpty">Please, enter entity data</div>
+              </div>
+            </div>
+            <div class="row card-margin-top">
+              <div class="col-md-12">
+                <button class="btn btn-lightBlue" ng-click="saveNewCardEntity()">Save</button>
+                <button class="btn btn-black" ng-click="showNewEntityCard()">Cancel</button>                  
+              </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+</div> 
+
+
+
+<!--
+<!-- The modal for updating an entity
+<script type="text/ng-template" id="updateEntityModal.html">
+  <div class="modal-header">
+      <h3 class="char-color-blue">Update Entity</h3>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal">
+      <div class="control-group">
+        <label class="control-label char-color-blue" style="text-align:left;" for="entityName"><b>Entity Name:</b></label>
+        <div class="controls">
+          <input type="text" id="entityName" class="char-color-blue" ng-model="newEntity.entityname">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label char-color-blue" style="text-align:left;" for="entityDesc"><b>Entity Description:</b></label>
+        <div class="controls">
+          <input type="text" id="entityDesc" class="char-color-blue" ng-model="newEntity.entitydescription">
+        </div>
+      </div>
+    </form>
+    <div class="alert alert-danger" ng-show="emptyEntity">Please, enter entity data</div>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-inverse" ng-click="cancelUpdate()">Cancel</button>
+      <button class="btn btn-primary" ng-click="updateEntity()">Update</button>
+  </div>
+</script> 
+
+
+<!-- The modal for updating a channel
+<script type="text/ng-template" id="updateChannelModal.html">
+  <div class="modal-header">
+      <h3 class="char-color-blue">Update Channel</h3>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal">
+      <div class="control-group">
+        <label class="control-label char-color-blue" style="text-align:left;" for="channelName"><b>Channel Name:</b></label>
+        <div class="controls">
+          <input type="text" id="channelName" class="char-color-blue" ng-model="newChannel.channelname">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label char-color-blue" style="text-align:left;" for="channelDesc"><b>Channel Description:</b></label>
+        <div class="controls">
+          <input type="text" id="channelDesc" class="char-color-blue" ng-model="newChannel.channeldesc">
+        </div>
+      </div>
+    </form>
+    <div class="alert alert-danger" ng-show="emptyChannel">Please, enter channel data</div>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-inverse" ng-click="cancelUpdate()">Cancel</button>
+      <button class="btn btn-primary" ng-click="updateChannel()">Update</button>
+  </div>
+</script> 

@@ -1,0 +1,137 @@
+<!-- /**
+    Copyright (C) 2014 ATOS
+ 
+    This file is part of AEON.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  
+    Authors: Javier García Hernández (javier.garcia@atos.net)
+             Baris Kara (baris.kara@atos.net)
+
+  
+  */ -->
+
+
+<!DOCTYPE html>
+<html lang="en" ng-app="PUBAPPMOBILE">
+  <head>
+    <title>AEON Pub Mobile Demo</title>
+	<meta charset="UTF-8"/>
+	<meta name="description" content="AEON">
+    <meta name="author" content="ATOS S.A.">
+    
+	<link rel="stylesheet" type="text/css" href="pubAppMobileLibs/bootstrap/css/bootstrap.css">	
+    <link rel="stylesheet" type="text/css" href="pubAppMobileLibs/bootstrap/css/bootstrap-responsive.css">
+	<link rel="stylesheet" type="text/css" href="pubAppMobileCss/pubAppMobile.css"> 
+	<script src="pubAppMobileLibs/bootstrap/js/bootstrap.js"></script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-resource.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-cookies.js"></script>  
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.4.0.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.2.1/moment.min.js"></script>
+	<script src="libs/aeonSDK.js"></script>
+	<script src="libs/socket.io.js"></script>
+	<script src="pubAppMobileControllers/PubAppMobileCtrl.js"></script>
+
+	<script src="controllers/app.js"></script>  
+	<script src="controllers/config.js"></script>
+  
+	<style type="text/css">
+      body {
+        padding-top: 60px;
+      }
+    </style>
+  </head>
+  <body>
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+		  <div class="navbar-inner">
+			<div class="container">
+			  <button type="button" class="btn navbar-btn" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="glyphicon glyphicon-bar"></span>
+				<span class="glyphicon glyphicon-bar"></span>
+				<span class="glyphicon glyphicon-bar"></span>
+			  </button>
+			  <a class="brand">PUBLISH APPLICATION DEMO</a>     
+			</div>
+		  </div>
+		</div>
+	<div class="snippet">
+		<div class="container" ng-controller="pubMobileCtrl">
+			<tabset>
+				<tab heading="Automatic">
+					</p>
+					<button class = "btn btn-success btn-medium" ng-show="!isAutomaticActive"  ng-disabled="hasErrorRaised()" ng-click="triggerLocation()">Start Publishing</button>
+					<button class = "btn btn-danger btn-medium" ng-show="isAutomaticActive" ng-disabled="hasErrorRaised()" ng-click="triggerLocation()">Stop Publishing</button>
+					</p>
+					<div class="alert alert-danger" ng-show="hasErrorRaised()">
+					  {{errorText}}
+					</div>
+					<textarea class="input-xxlarge form-control" id="logArea" rows="10" ng-model="publicationLogs" readonly></textarea>
+					<hr>
+					<div class="alert alert-error" ng-show="pubUrlEmpty">
+						Please, enter a publication url
+					</div>
+					<form class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" style="text-align:left;" for="urlInput"><b>Publication URL:</b></label>
+							<div class="controls">
+							  <input class="col-md-4" type="text" id="urlInput" ng-readonly="isAutomaticActive" ng-model="urls.pubUrl" placeholder="Enter publication url">
+							</div>
+						</div>
+					</form>						  
+				</tab>
+				<tab heading="Manual">
+					</p>
+					<div class="alert alert-danger" ng-show="showCoordsAlert">
+						Please, introduce coordinates
+					</div>
+					<form class="form-horizontal">
+						  <div class="control-group">
+							<label class="control-label" style="text-align:left;" for="inputLat"><b>Latitude:</b></label>
+							<div class="controls">
+							  <input class="col-md-4" type="text" id="inputLat" ng-model="coords.manuelLat">
+							</div>
+						  </div>
+						  <div class="control-group">
+							<label class="control-label" style="text-align:left;" for="inputLong"><b>Longitude:</b></label>
+							<div class="controls">
+							  <input class="col-md-4" type="text" id="inputLong" ng-model="coords.manuelLong">
+							</div>
+						  </div>
+						  <div class="control-group">
+							<div class="controls">
+							 <button type="submit" class="btn btn-success btn-medium" ng-click="submitLocation()">Submit</button>
+							</div>
+						  </div>
+					</form>
+					<textarea class="input-xxlarge form-control" id="logArea2" rows="10" ng-model="publicationLogs" readonly></textarea>
+					<hr>
+					<div class="alert alert-error alertConfig" ng-show="pubUrlEmpty">
+						Please, enter a publication url
+					</div>
+					<form class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" style="text-align:left;" for="urlInput2"><b>Publication URL:</b></label>
+							<div class="controls">
+							  <input class="col-md-4" type="text" id="urlInput2" ng-readonly="isAutomaticActive" ng-model="urls.pubUrl" placeholder="Enter publication url">
+							</div>
+						</div>
+					</form>											
+				</tab>                         
+			 </tabset>      
+		</div>
+	</div>
+  </body>
+</html>

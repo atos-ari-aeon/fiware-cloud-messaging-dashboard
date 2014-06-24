@@ -1,0 +1,56 @@
+.web-logo{
+  height: 35px;
+  margin: 8px 0;
+}
+
+#navbar-menu li>a{
+	color:#255A75;
+}
+
+#navbar-menu li.dropdown>a{
+	background: white;
+}
+
+.navbar {
+  background: #fff;
+  padding: 0.3em 0;
+}
+
+#navbar-menu li>a:hover{
+	background-color: #77B4D6;
+	color: #fff;
+}
+
+#navbar-menu li>a:active{
+	background-color: #255A75;
+	color: #fff;
+}
+
+.navbar-brand {
+  color: #000;
+  font-family: georgia, serif;
+  font-weight: bold;
+}
+
+#navbar-main li>a{
+  color:#255A75;
+  margin-left: 5%;
+}
+
+#navbar-main li:last-child>a{
+  width: 100%;
+}
+
+#navbar-main li>a:hover{
+  background: #77B4D6;
+  color: #fff;
+}
+
+#navbar-main li>a:active{
+  background: #255A75;
+  color: #fff;  
+}
+
+/*#navbar-main ul.dropdown-menu li>a{
+    text-align: center;
+}*/

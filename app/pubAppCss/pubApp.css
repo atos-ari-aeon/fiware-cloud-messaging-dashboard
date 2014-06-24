@@ -1,0 +1,213 @@
+/**
+    Copyright (C) 2014 ATOS
+ 
+    This file is part of AEON.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  
+    Authors: Javier García Hernández (javier.garcia@atos.net)
+             Baris Kara (baris.kara@atos.net)
+
+  */
+
+.nav-header-snippet{
+  display: block;
+  padding: 3px 15px;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #999999;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+.snippet{
+  clear: both;
+  position: relative;
+  border: 1px solid lightgrey;
+  padding:1.0rem;
+  box-shadow:0 1px 2px #aaa;
+  background: #fafafa;
+  margin:0 1rem 1rem;
+  -moz-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  width: auto;
+  -webkit-transition: -webkit-transform 0.1s ease-in; 
+  -webkit-box-shadow: 3px 3px 5px rgba(51, 51, 50, 0.62);
+  -moz-box-shadow:    3px 3px 5px rgba(51, 51, 50, 0.62);
+  box-shadow:         3px 3px 5px rgba(51, 51, 50, 0.62);  
+}
+
+.wrapText{
+  display: block;   
+}
+
+.wordWrap{
+  white-space: pre-wrap;      /* CSS3 */   
+   white-space: -moz-pre-wrap; /* Firefox */    
+   white-space: -pre-wrap;     /* Opera <7 */   
+   white-space: -o-pre-wrap;   /* Opera 7 */    
+   word-wrap: break-word;      /* IE */
+}
+
+.menuDepth{
+  -webkit-box-shadow: 3px 3px 5px rgba(51, 51, 50, 0.62);
+  -moz-box-shadow:    3px 3px 5px rgba(51, 51, 50, 0.62);
+  box-shadow:         3px 3px 5px rgba(51, 51, 50, 0.62);
+}
+
+.codeFormat-Blue{
+  font-family: monospace;
+  font-size: 12px;
+  color: blue;
+}
+
+.codeFormat-Green{
+  font-family: monospace;
+  font-size: 12px;
+  color: green;
+}
+
+.span4{
+  background-color: white;
+  width: 300px;
+}
+
+.alertConfig{
+  margin-bottom: 0px;
+  margin-top: 2%;
+  margin-left: 3%;
+}
+
+.btn-lightBlue.active {
+  color: rgba(255, 255, 255, 0.75);
+}
+.btn-lightBlue {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #67abd1;
+  background-image: -moz-linear-gradient(top, #77b4d6, #509eca);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#77b4d6), to(#509eca));
+  background-image: -webkit-linear-gradient(top, #77b4d6, #509eca);
+  background-image: -o-linear-gradient(top, #77b4d6, #509eca);
+  background-image: linear-gradient(to bottom, #77b4d6, #509eca);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff77b4d6', endColorstr='#ff509eca', GradientType=0);
+  border-color: #509eca #509eca #30769e;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #509eca;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+
+.btn-lightBlue:hover,
+.btn-lightBlue:focus,
+.btn-lightBlue:active,
+.btn-lightBlue.active,
+.btn-lightBlue.disabled,
+.btn-lightBlue[disabled] {
+  color: #ffffff;
+  background-color: #509eca;
+  *background-color: #3c94c4;
+}
+.btn-lightBlue:active,
+.btn-lightBlue.active {
+  background-color: #3685b1 ;
+}
+
+.btn-darkBlue {
+  background-color: #255A75;
+  border-color: #255A75;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+  background-color: #204e66;
+  background-image: -moz-linear-gradient(top,#255A75,#193c4e);
+  background-image: -webkit-gradient(linear,0 0,0 100%,from(#255A75),to(#193c4e));
+  background-image: -webkit-linear-gradient(top,#255A75,#193c4e);
+  background-image: -o-linear-gradient(top,#255A75,#193c4e);
+  background-image: linear-gradient(to bottom,#255A75,#193c4e);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff255a75', endColorstr='#ff183c4e', GradientType=0);
+  border-color: #193c4e #193c4e #060f14;
+  border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+}
+.btn-darkBlue:hover,
+.btn-darkBlue:focus {
+  text-decoration: none;
+  background-position: 0 -15px;
+  -webkit-transition: background-position .1s linear;
+  -moz-transition: background-position .1s linear;
+  -o-transition: background-position .1s linear;
+  transition: background-position .1s linear;
+}
+.btn-darkBlue:hover,
+.btn-darkBlue:focus {
+  background-color: #193c4e;
+}
+.btn-darkBlue:active,
+.btn-darkBlue.active,
+.btn-darkBlue.active:hover {
+  background-color: #1f4b62;
+  border-color: #193c4e;
+}
+.btn-darkBlue.disabled:hover,
+.btn-darkBlue.disabled:focus,
+.btn-darkBlue.disabled:active,
+.btn-darkBlue.disabled.active,
+.btn-darkBlue[disabled] .btn-darkBlue:hover,
+.btn-darkBlue[disabled] .btn-darkBlue:focus,
+.btn-darkBlue[disabled] .btn-darkBlue:active,
+.btn-darkBlue[disabled] .btn-darkBlue.active {
+  background-color: #255A75;
+  border-color: #255A75;
+}
+
+
+.btn-black.active {
+  color: rgba(255, 255, 255, 0.75);
+}
+.btn-black {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #1f2022;
+  background-image: -moz-linear-gradient(top, #151617, #2d3032);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#151617), to(#2d3032));
+  background-image: -webkit-linear-gradient(top, #151617, #2d3032);
+  background-image: -o-linear-gradient(top, #151617, #2d3032);
+  background-image: linear-gradient(to bottom, #151617, #2d3032);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff151617', endColorstr='#ff2d3032', GradientType=0);
+  border-color: #2d3032 #2d3032 #09090a;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #2d3032;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.btn-black:hover,
+.btn-black:focus,
+.btn-black:active,
+.btn-black.active,
+.btn-black.disabled,
+.btn-black[disabled] {
+  color: #ffffff;
+  background-color: #2d3032;
+  *background-color: #212324;
+}
+.btn-black:active,
+.btn-black.active {
+  background-color: #151617 ;
+}

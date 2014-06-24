@@ -1,0 +1,85 @@
+<!-- /**
+    Copyright (C) 2014 ATOS
+ 
+    This file is part of AEON.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  
+    Authors: Javier García Hernández (javier.garcia@atos.net)
+             Baris Kara (baris.kara@atos.net)
+
+  
+  */ -->
+
+
+<div class="row" ng-controller="userManagementCtrl">
+  <div class="col-md-8" >
+    <h2 class="char-color-blue">User Management</h2>
+    <!--Definition of the cards layout n X 2 -->
+    <div class="col-md-8">
+      <div class = "row">
+        <div class="col-md-12">
+          <div class="card animated rotateIn char-color-blue">            
+            <h4>Personal Information</h4>  
+            <p>Username: {{user.username}}</p>
+            </br>
+            <label class="alert alert-success" ng-show="passChangeSuccessful">Your password successfuly changed</label>   
+             <label class="alert alert-danger" ng-show="passChangeError">A problem occured, we cannot change your password currently.</label> 
+            <button class="btn btn-sm btn-lightBlue" ng-click="reverseCollapse()">Change Password</button>  
+            <div collapse="isCollapsed">
+              <hr>
+              <form class="form-horizontal" role="form">
+                <div class="form-group">
+                  <div class="col-md-10">
+                    <input type="password" class="form-control" placeholder="Current Password" ng-model="password.current">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-10">
+                   <input id="inputPassword" type="password" class="form-control" placeholder="Password" ng-model="password.newPass">
+                  </div>                  
+                </div>
+                <div class="form-group">
+                  <div class="col-md-10">
+                    <input type="password" class="form-control" placeholder="Retype Password" ng-model="password.retype">
+                  </div>
+                </div>
+                 <div>
+                  <label for="inputPassword" class="col-md-6 col-sm-6 col-xs-6 pass-strength" style="margin-left:25%; margin-right:25%;" ng-class="getStrength()"> {{strength}} </label>
+                </div>
+                 <div class="form-group">
+                  <div class="col-md-10 centerStyle">
+                    <div class="alert alert-danger" ng-show="incorrectPass">Incorrect Password</div>
+                    <div class="alert alert-danger" ng-show="passMismatch">Password doesn't match</div>
+                    <div class="alert alert-danger" ng-show="emptyField">Please, fill all password fields</div>    
+                    <div class="alert alert-danger" ng-show="weakPassword">Please, type a stronger password</div> 
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 pull-right">
+                    <button class="btn btn-sm btn-lightBlue" ng-click="changePassword()">Save</button>
+                    <button class="btn btn-sm btn-black" ng-click="cancelPassChange()">Cancel</button>
+                  </div>
+                </div>
+              </form>   
+            </div>
+          </div>
+        </div>
+      </div>   
+     </div>
+
+  </div><!--/span-->      
+</div><!--/row-->      
+
+

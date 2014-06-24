@@ -1,0 +1,152 @@
+#loginForm{
+  min-width: 300px;  
+  padding: 15px 10px;
+}
+
+#map-canvas { 
+  height: 300px; 
+  padding:10px;
+  margin: 10px;
+}
+
+.btn-primary{
+  color:#fff;
+  background-color: #255A75;
+  border-color: #255A75;
+}
+
+.jumbotron {
+  /*background: #f0f0f0;*/
+  background: url(../img/bg2.jpg) 50% 0 repeat fixed;   
+  color: #333;
+  text-align: center;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.jumbotron h1 {
+  margin-bottom: 0;
+  margin-top: 30px;
+  font-family: georgia, serif;
+  font-size: 2.5em;  
+}
+.jumbotron h2 {
+  font-size: 1.2em;
+  font-style: italic;
+  font-weight: normal;
+  line-height: 1.4em;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+.jumbotron .btn {
+  font-size: 1.2em;
+  padding: 0.3em 2.5em 0.5em;
+}
+.jumbotron .btn .glyphicon {
+  margin-left: 0.2em;
+  position: relative;
+  top: 3px;
+}
+
+#position-gen{
+  text-align: center;
+  margin-top: 4%;
+}
+
+#position-gen-img{  
+  margin: 5%;
+}
+
+.contactUs{
+  margin: 15% 10%;
+  text-align: center;
+}
+
+.contactUsIcons{
+  margin-left:10px;
+}
+
+.techs{
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.publication{
+  height: 250px;
+  opacity: 0.5;
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  border-radius: 10px;
+  margin-bottom: 3%;
+}
+
+.publicationInternal{
+    position: absolute;
+    top: 5%;
+    left: 20%;
+  }
+
+.thumbnail .img-thumbnail{
+  display: block;  
+  margin-bottom: 20px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+  -moz-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.thumbnail{
+  padding: 0;
+}
+
+.atosLogo{
+  position: absolute;
+  width: 20%;
+  right: 2%;
+  bottom: -5%;
+  margin-bottom: 0;
+  z-index: 100;
+
+}
+
+.quickStartInfo{
+    height: 30px;
+  }
+
+@media screen and (max-width: 768px) {
+  .publicationInternal{
+    left: 31%;
+  }
+  .quickStartInfo{
+    height: 30px;
+  }
+
+  .publication{
+    margin-bottom: 3%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .publicationInternal{
+    left: 5%;
+    right: 5%;
+    bottom: 5px;
+  }
+
+  .publication{
+    margin-bottom: 3%;
+  }
+
+  .atosLogo{
+    right: 5%;
+  }
+
+  .quickStartInfo{
+    height: 30px;
+  }
+}

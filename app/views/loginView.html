@@ -1,0 +1,126 @@
+<!-- /**
+    Copyright (C) 2014 ATOS
+ 
+    This file is part of AEON.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  
+    Authors: Javier García Hernández (javier.garcia@atos.net)
+             Baris Kara (baris.kara@atos.net)
+
+  
+  */ -->
+
+<myparallax>
+  <div id="top" class="jumbotron" data-type="background" data-speed="10">
+    <div class="container">
+      <h1>Real Time Communication Network</h1>
+      <h2>Communicate your applications using AEON's cloud infrastructure</h2>
+      <p style="margin-bottom: 40px;"><a id="signUpButton" class="btn btn-primary btn-lg" ng-click="signUp()">Sign Up Today <span class="glyphicon glyphicon-circle-arrow-right"></span></a></p>
+    </div> <!-- /.container -->
+  </div> <!-- /.jumbotron -->
+</myparallax>
+
+<div class="container" ng-controller="featuresCtrl">  
+  <h3 id="features" class="subhead">Features</h3>
+  <div class="row benefits">    
+    <div class="col-md-3 col-sm-6 col-xs-6 benefit" ng-repeat="feature in features">
+      <div class="benefit-ball">
+        <img ng-src="{{feature.icon}}"></span>
+      </div>
+      <h3>{{feature.title}}</h3>
+      <p>{{feature.text}}</p>
+    </div> <!-- /.benefit -->        
+  </div> <!-- /.row -->  
+  <div class="row">
+    <div class="col-md-12">
+      <img src="img/techs-gray.gif" class="techs"/>  
+    </div>
+  </div>
+</div> <!-- /.container -->
+
+<div class="container-alternate" ng-controller="carouselCtrl" data-type="background" data-speed="10">
+  <div class="container"  ng-controller="mapCtrl">
+    <h3 id="demo" class="subhead">Live Demo</h3>
+    <div class="row">
+      <div id="position-gen" class="col-md-6">
+        <div class="publication">
+
+        </div>
+        <div class="publicationInternal">
+          <h3>Publish Ramdom Position</h3>
+          <img src="img/location.png" id="position-gen-img"><br>
+          <button type="button" class="btn btn-primary btn-lg" ng-click="publishRandomPosition()">Publish</button>
+        </div>
+      </div> 
+      <div class="col-md-6" >    
+        <div class="thumbnail">
+          <div id="map-canvas" style="margin:4px;"></div>              
+        </div>         
+      </div>          
+    </div> <!-- /.demo -->
+  </div> <!-- /.container -->
+</div> <!-- /.container-alternate -->
+
+<div class="container"> 
+  <div style="margin-bottom:3%;">
+      <h3 id="quickstart" class="subhead"></h3>
+      <div class="row">
+        <div class="col-md-6">
+          <div style="text-align:center;">
+            <h3>
+              OpenSource SDK
+            </h3>
+            <p class="quickStartInfo">Download the specific SKD to start developing your applications using AEON.</p>
+            <img src="img/bookshelf.png" style="margin:6% 0"></img><br>
+            <!-- <div ng-repeat="lang in quickStart" class="col-md-4" style="text-align:center;"> -->
+              <span ng-repeat="lang in quickStart"><a href="{{lang.href}}" style="color:#255A75;">{{lang.language}}</a><br></span>
+           <!--  </div> -->
+          </div>                    
+        </div> <!-- /.col-md-6 -->        
+        <div class="col-md-6">
+          <div style="text-align:center;">
+            <h3>Quick Start</h3>        
+            <p class="quickStartInfo">Basic examples to learn how easy is to use the AEON platform.</p>
+            <img src="img/clipboard.png" style="margin:6% 0"></img><br>
+            <!-- <div ng-repeat="lang in quickStart" class="col-md-4" style="text-align:center;"> -->
+              <span ng-repeat="lang in quickStart"><a href="{{lang.example}}" style="color:#255A75;">{{lang.language}}</a><br></span>                      
+            <!-- </div> -->
+          </div>          
+        </div> <!-- /.col-md-6 -->
+      </div> <!-- /.row -->
+    </div>
+</div> <!-- /.container -->
+
+<div class="container-alternate" data-type="background" data-speed="10">
+  <div class="container" >    
+    <h3 id="about" class="subhead">About Us</h3>
+    <div class="row about">
+      <div class="col-md-12" style="text-align:center; margin-top:3%; margin-bottom:3%;">
+        <div class="img-thumbnail">
+          <img src="img/Atos-trans.png" class="atosLogo"> 
+          <img style="width:100%;" ng-src="{{atosFindUs.img}}">
+        </div>
+      </div> <!-- /.col-md-6 -->
+      <div class="col-md-12">
+        <div class="contactUs" style="margin-top:0; margin-bottom:0;">             
+          <a class="contactUsIcons" ng-repeat="contact in atosContactUs" href="{{contact.href}}"><img ng-src="{{contact.icon}}"/></a>
+          <p>
+            {{atosFindUs.address[0]}}<br>{{atosFindUs.address[1]}}<br>{{atosFindUs.address[2]}}<br>{{atosFindUs.address[3]}}
+          </p>
+        </div>
+      </div> <!-- /.col-md-6 -->     
+    </div> <!-- /.row -->    
+  </div> <!-- /.container -->
+</div> <!-- /.container-alternate -->

@@ -1,0 +1,90 @@
+<!-- /**
+    Copyright (C) 2014 ATOS
+ 
+    This file is part of AEON.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  
+    Authors: Javier García Hernández (javier.garcia@atos.net)
+             Baris Kara (baris.kara@atos.net)
+
+  
+  */ -->
+
+<div id="bg">
+  <img src="img/bg2.jpg" alt="">
+</div>
+<div class="container">
+  <div class="row">
+    <div class="form-signup center-block col-md-7 col-sm-7 col-xs-7 col-lg-7" ng-controller="signUpCtrl">
+      <h3>Join AEON!</h3>
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <div class="col-md-10" style="margin-left:7%; margin-right:7%;">
+            <input type="email" class="form-control" placeholder="Email address" ng-model="user.username">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-10" style="margin-left:7%; margin-right:7%;">
+           <input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="user.password"> 
+          </div>
+          <!-- <label for="inputPassword" class="col-md-2 pass-strength" ng-class="getStrength()"> {{strength}} </label> -->
+        </div>
+        <div class="form-group">
+          <div class="col-md-10" style="margin-left:7%; margin-right:7%;">
+            <input type="password" class="form-control" placeholder="Retype Password" ng-model="passwordRetype">
+          </div>
+        </div>
+        <div>
+          <label for="inputPassword" class="col-md-6 col-sm-6 col-xs-6 pass-strength" style="margin-left:25%; margin-right:25%;" ng-class="getStrength()"> {{strength}} </label>
+        </div>
+         <div class="form-group">
+          <div class="col-md-10">
+            <div class="alert alert-danger" style="margin-left:25%; margin-right:5%;" ng-show="emptyField">Please, fill in all fields</div>
+            <div class="alert alert-danger" style="margin-left:25%; margin-right:5%;" ng-show="existingUser">User already exists</div>
+            <div class="alert alert-danger" style="margin-left:25%; margin-right:5%;" ng-show="passMismatch">Password doesn't match</div>    
+            <div class="alert alert-danger" style="margin-left:25%; margin-right:5%;" ng-show="emptyEmail">Please, choose an email address</div> 
+            <div class="alert alert-danger" style="margin-left:25%; margin-right:5%;" ng-show="emptyPass">Please, choose a password</div>  
+            <div class="alert alert-danger" style="margin-left:25%; margin-right:5%;" ng-show="wrongCaptcha">Captcha is not correct. Please try again.</div>
+            <div class="alert alert-danger" style="margin-left:25%; margin-right:5%;" ng-show="weakPassword">Please, type a stronger password.</div>
+            <!-- <div class="alert alert-danger" style="margin-left:25%; margin-right:5%;" ng-show="serverDown">Server unreachable. Please, contact the administrator.</div> -->
+          </div>
+        </div>
+        <button class="btn btn-primary"  type="submit" ng-click="openCaptchaModel()">Join now!</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- The modal for captcha verification-->
+<script type="text/ng-template" id="captcha.html">
+  <div class="modal-header captcha-header">
+      <h3>Captcha Verification</h3>
+  </div>
+  <div class="modal-body captcha-body">
+    <div
+      vc-recaptcha
+      ng-model="model.captcha"
+      theme="clean"
+      lang="en"
+      key={{recaptchaKey}}
+      ></div>
+    </br>
+    <div class="alert alert-danger" ng-show="emptyCaptcha">Please, enter captcha data</div>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-inverse" ng-click="cancelCaptcha()">Cancel</button>
+      <button class="btn btn-primary" ng-click="verifyCaptcha()">Verify</button>
+  </div>
+</script> 

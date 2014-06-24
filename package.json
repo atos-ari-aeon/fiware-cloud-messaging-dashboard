@@ -1,0 +1,22 @@
+{
+    "name": "aeongui",
+    "version": "0.2.0",
+    "private": true,
+    "scripts": {
+        "start": "node scripts/web-server.js"
+    },
+    "dependencies": {
+    },
+    "engines": {
+        "node": "0.8.x",
+        "npm": "1.1.x"
+    },
+    "license": "GPLv3",
+    "contributors": [{
+        "name": "Javier Garcia Hernandez",
+        "email": "javier.garcia@atos.net"
+    }, {
+        "name": "Baris Kara",
+        "email": "baris.kara@atos.net"
+    }]
+}

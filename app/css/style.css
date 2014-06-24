@@ -1,0 +1,541 @@
+/**
+  * Copyright (C) 2013 ATOS
+  *
+  * Licensed under the Apache License, Version 2.0 (the "License");
+  * you may not use this file except in compliance with the License.
+  * You may obtain a copy of the License at
+  *
+  *         http://www.apache.org/licenses/LICENSE-2.0
+  *
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
+  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  *
+  * Authors: Javier García Hernández (javier.garcia@atos.net)
+
+  */
+
+hr{
+  margin-bottom: 0;
+}
+
+.logoSpan{ 
+  margin-top: 60px;
+}
+
+.logoPosition{
+  margin-left: 60px; 
+}
+
+.imgDimensions{
+  width: 100%;
+  height: 100%;
+}
+
+.carouselCaptionAdapt{
+  bottom:45%;
+  left: 15%;
+  padding: 30px;
+}
+
+.carouselText{
+  font-family: sans-serif;
+  font-size: 24px;
+}
+
+.form-signin {
+  padding: 10px 20px 20px;
+  margin: 5px 5px 5px 5px; 
+  width: 250px; 
+  background-color: #fff;
+  border: 1px solid #e5e5e5;  
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+          box-shadow: 0 1px 2px rgba(0,0,0,.05);        
+}
+
+.form-signup {
+  padding: 19px 29px 29px;
+  margin-top: 70px;  
+  text-align: center;
+  float:none;
+  background-color: rgba(255,255,255,0.5);
+  -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+          border-radius: 10px;
+       
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin input[type="text"],
+.form-signin input[type="password"] {
+  font-size: 16px;
+  height: auto;
+  margin-bottom: 15px;
+  padding: 7px 9px;
+}
+
+.card, .cardChannel{
+  position: relative;  
+  border:1px solid #255A75;
+  border-radius: 5px;
+  padding:1.5rem;
+  background: #F7FBFD;
+  margin:0 0rem 0rem;  
+  /*-webkit-transition: -webkit-transform 0.1s ease-in;   */
+}
+
+.card:hover{
+  -webkit-transition:all .2s ease-in-out;
+     -moz-transition:all .2s ease-in-out;
+       -o-transition:all .2s ease-in-out;
+          transition:all .2s ease-in-out;  
+
+  /*-webkit-transform: translateY(-10px) scale(1.01, 1.01);
+     -moz-transform: translateY(-10px) scale(1.01, 1.01);
+      -ms-transform: translateY(-10px) scale(1.01, 1.01);
+       -o-transform: translateY(-10px) scale(1.01, 1.01);
+          transform: translateY(-10px) scale(1.01, 1.01);*/
+          
+  -webkit-box-shadow: 2px 2px 10px lightgrey;
+     -moz-box-shadow: 2px 2px 10px lightgrey;
+          box-shadow: 2px 2px 10px lightgrey;
+          
+
+}
+
+.cardChannel, .menuDepth{
+  /*
+  -webkit-box-shadow: 3px 3px 5px rgba(51, 51, 50, 0.62);
+  -moz-box-shadow:    3px 3px 5px rgba(51, 51, 50, 0.62);
+  box-shadow:         3px 3px 5px rgba(51, 51, 50, 0.62);
+  */
+}
+
+.menuSide, .channelArea{
+  position: fixed;
+}
+
+.workingArea{
+  position: relative;
+  margin-left: 15%;
+  margin-right: 10%;
+}
+
+.card-margin-top{
+  margin-top: 3%;
+}
+
+.card-margin-right{
+  margin-top: 1%;
+}
+
+.channel-padding{
+  padding-left: 0;
+  padding-top: 3%;
+  padding-right: 3%;
+}
+
+.channelArea{
+  right: 0px;
+}
+
+h4[contentEditable], p[contentEditable]{
+  background-color: lightgrey;  
+}
+
+.buttonChannel{
+  position: relative;
+  top: -6px;
+}
+
+.newEntity{
+  margin-bottom:15px;
+}
+
+.newChannel{
+  margin-left:5px; 
+  margin-bottom:10px;
+}
+
+.positionAbsolute{
+  position: absolute;
+}
+
+.positionForeground{
+  top:20%;
+  left:7%;
+}
+
+.positionForegroundSignUp{
+  top:20%;
+  left:25%;
+}
+
+.centerStyle{
+  text-align: center;
+}
+
+.rightAlignment{
+  position: relative;
+  left: 40%;
+}
+
+.span4{
+  background: white;
+  width: 300px;
+}
+
+.qrcode{  
+  margin: 0 1rem 0;
+  padding: 1.5rem;
+  width: auto;
+}
+
+.large-icon{
+  font-size: 20px;
+}
+
+.profile-pic-small {
+  max-height:30px;
+  width:auto;
+  vertical-align:middle;
+}
+
+.navbar-element {
+  padding: 15px 15px 10px !important;
+}
+
+.new-panel {
+  float:left;
+  /*margin: 0 1rem 1rem;*/
+  padding: 0;  
+}
+
+.new-card .user-heading {
+  color: #fff;
+  /*border-radius: 4px 4px 0 0;*/
+  /*-webkit-border-radius: 4px 4px 0 0;*/
+  /*padding: 29px;*/
+  padding-top: 3%;
+  text-align: center;  
+}
+
+.new-card > a, a:hover, a:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+
+.card-btn {
+  display: block;
+  cursor: pointer;
+  border-width: 1px;
+  border-style: dashed;
+  border-color: #77b4d6;
+  /*margin-left: 10px;*/
+  /*margin-right: 10px;*/
+  border-radius: 5px;
+}
+
+.card-btn div.blue-bg {
+  background-color: #cde6f6;
+}
+
+.card-btn:hover div.blue-bg{
+  background-color: #bcddf3;
+}
+
+.card-btn div.description{ 
+  color: #bcddf3;font-size: 27px;
+}
+
+.card-btn:hover div.description{ 
+  color: #59ace2;
+  font-size: 27px;
+}
+
+.user-heading > i {
+  font-size: 88pt !important;
+}
+
+.newCardClicked{
+  position: relative;  
+  border:1px solid #7abce7;
+  padding:1.5rem;
+  background: #fafafa;
+  border-style: dashed;
+  -webkit-transition: -webkit-transform 0.1s ease-in;   
+}
+
+.item-lower{
+  padding: 21px;
+  position: relative;
+}
+
+.card-form{
+  margin: 48px 10px 70px;
+}
+
+.captcha-header{
+  padding:0;
+  text-align: center;
+}
+
+.captcha-body{
+  text-align: center;
+  padding:29px 0px 0px 71px;
+}
+
+.pass-strength{
+  line-height: 2; 
+  margin-left:-9px;
+}
+
+.char-color-blue{
+  color: #255A75;
+}
+
+.bottom-desc{
+  margin-top:20px;
+  margin-bottom:10px;
+}
+
+.remove-btn{
+  position: absolute;
+  top: 3%;
+  right: 0%;
+}
+
+.remove-btn-channel{
+  position: absolute;
+  top: -3%;
+  right: -3%;
+}
+
+.remove-icon-big{
+  font-size: 22px;
+}
+
+.remove-icon-small{
+  font-size: 18px;
+}
+
+.remove-btn, .remove-icon-small, .remove-icon-big, .remove-icon-extrasmall{
+  color: #255A75;
+}
+
+.remove-btn:hover, .remove-icon-small:hover, .remove-icon-big:hover, .remove-icon-extrasmall:hover{
+  color: #77B4D6;
+}
+
+.btn-lightBlue.active {
+  color: rgba(255, 255, 255, 0.75);
+}
+.btn-lightBlue {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #67abd1;
+  background-image: -moz-linear-gradient(top, #77b4d6, #509eca);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#77b4d6), to(#509eca));
+  background-image: -webkit-linear-gradient(top, #77b4d6, #509eca);
+  background-image: -o-linear-gradient(top, #77b4d6, #509eca);
+  background-image: linear-gradient(to bottom, #77b4d6, #509eca);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff77b4d6', endColorstr='#ff509eca', GradientType=0);
+  border-color: #509eca #509eca #30769e;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #509eca;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+
+.btn-lightBlue:hover,
+.btn-lightBlue:focus,
+.btn-lightBlue:active,
+.btn-lightBlue.active,
+.btn-lightBlue.disabled,
+.btn-lightBlue[disabled] {
+  color: #ffffff;
+  background-color: #509eca;
+  *background-color: #3c94c4;
+}
+.btn-lightBlue:active,
+.btn-lightBlue.active {
+  background-color: #3685b1 ;
+}
+
+.btn-black.active {
+  color: rgba(255, 255, 255, 0.75);
+}
+.btn-black {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #1f2022;
+  background-image: -moz-linear-gradient(top, #151617, #2d3032);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#151617), to(#2d3032));
+  background-image: -webkit-linear-gradient(top, #151617, #2d3032);
+  background-image: -o-linear-gradient(top, #151617, #2d3032);
+  background-image: linear-gradient(to bottom, #151617, #2d3032);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff151617', endColorstr='#ff2d3032', GradientType=0);
+  border-color: #2d3032 #2d3032 #09090a;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #2d3032;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.btn-black:hover,
+.btn-black:focus,
+.btn-black:active,
+.btn-black.active,
+.btn-black.disabled,
+.btn-black[disabled] {
+  color: #ffffff;
+  background-color: #2d3032;
+  *background-color: #212324;
+}
+.btn-black:active,
+.btn-black.active {
+  background-color: #151617 ;
+}
+
+.error-info{
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #a94442;
+}
+
+.sucess-info{
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #628F62;
+}
+
+#bg {
+  position: fixed; 
+  top: -50%; 
+  left: -50%; 
+  width: 200%; 
+  height: 200%;
+}
+#bg img {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  margin: auto; 
+  min-width: 50%;
+  min-height: 50%;
+}
+
+@media screen and (min-width: 1920px) {
+.card{
+    margin-right: 3%;
+    margin-bottom: 3%;    
+  }
+
+  .remove-btn-channel{
+    right: -8%;
+  }
+}
+
+@media screen and (max-width: 1920px) {
+.card{
+    margin-right: 3%;
+    margin-bottom: 3%;    
+  }
+}
+
+@media screen and (max-width: 1224px) {
+  .card, .new-panel{
+    min-width: 50%;
+  }
+
+  .workingArea{
+    margin-left: 15%;
+  }
+
+  .card{
+    margin-right: 3%;
+    margin-bottom: 3%;
+  }
+
+  .remove-btn-channel{
+    right: -4%;
+    top: -6%;
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 480px){
+  .card, .new-panel{
+    min-width: 100%;
+  }
+
+  .workingArea{
+    margin-left: 10%;
+  }
+
+  .card{
+    margin-bottom: 3%;
+  }
+
+  .remove-btn-channel{
+    right: -6%;
+    top: -8%;
+  }
+}
+
+@media screen and (max-width: 1024px){
+  .remove-btn-channel{
+    right: -4%;
+    top: -6%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card, .new-panel{
+    min-width: 100%;
+  }
+
+  .workingArea{
+    margin-left: 5%;
+  }
+
+  .card{
+    margin-bottom: 3%;
+  }  
+
+  .remove-btn-channel{
+    right: -9%;
+    top: -4%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+#newChannelButton{
+    margin-left: -8%; 
+  }
+
+  #signUpButton{
+    padding: 5% 5%;
+  }
+
+  .remove-btn-channel{
+    right: -11%;
+    top:-3%;
+  }
+}

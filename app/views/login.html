@@ -1,0 +1,85 @@
+<!-- /**
+    Copyright (C) 2014 ATOS
+ 
+    This file is part of AEON.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  
+    Authors: Javier García Hernández (javier.garcia@atos.net)
+             Baris Kara (baris.kara@atos.net)
+
+  
+  */ -->
+ 
+
+<nav id="navbar-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a id="navHeader" class="nav-link" href="#top"><img class="web-logo" src="img/web_header.png"/></a>
+    </div> <!-- /.navbar-header -->
+
+    <div  class="collapse navbar-collapse navbar-ex1-collapse">      
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-show="showNavbarTabs()"><a href="#features" class="nav-link">Features</a></li>        
+        <li ng-show="showNavbarTabs()"><a href="#demo" class="nav-link">Live Demo</a></li>
+        <li ng-show="showNavbarTabs()"><a href="#quickstart" class="nav-link">Quick Start</a></li>
+        <li ng-show="showNavbarTabs()"><a href="#about" class="nav-link">About</a></li>
+        <li ng-show="activateBack"><a href="" ng-click="goBackHome()">Back</a></li>
+        <li ng-show="showNavbarTabs()" class="dropdown" id="menuLogin">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login<b class="caret"></b></a>
+          <div id="loginForm" class="dropdown-menu">   
+            <form role="form">
+              <div class="form-group">
+                <input type="email" class="form-control" ng-model="user.username" placeholder="Email address" required autofocus>
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" ng-model="user.password" placeholder="Password" required>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="rememberUser"> Remember me</input>
+                </label>
+                <div class="pull-right">
+                  <a href="" ng-click="resetPassword()" style="text-align:right">Forgot Password?</a> 
+                </div>
+              </div>
+              <div class="form-group centerStyle">
+                <div class="alert alert-danger" ng-show="invalidUser">Invalid User or Password</div>
+                <!-- <div class="alert alert-danger" ng-show="serverDown">Server unreachable. Please, contact the administrator.</div> -->
+              </div>
+              <button class="btn btn-primary btn-block" style="margin-left:0;" type="submit" ng-click="login()">Sign in</button>  
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div> <!-- /.navbar-collapse -->
+  </div> <!-- /.container -->
+</nav> <!-- /.navbar -->
+
+<div ng-include src="actualView"></div>
+
+<footer>
+  <div class="container clearfix" style="text-align:center;">
+    <p>
+      Copyright &copy; <a href="http://atos.net/">ATOS S.A.</a> 2013
+    </p>   
+  </div> <!-- /.container -->
+</footer>
+
+

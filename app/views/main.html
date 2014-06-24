@@ -1,0 +1,74 @@
+<!-- /**
+    Copyright (C) 2014 ATOS
+ 
+    This file is part of AEON.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  
+    Authors: Javier García Hernández (javier.garcia@atos.net)
+             Baris Kara (baris.kara@atos.net)
+
+  
+  */ -->
+
+
+<nav id="navbar-main" class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="nav-link" href="#top"><img class="web-logo" src="img/web_header.png"/></a>
+    </div> <!-- /.navbar-header -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav navbar-left">
+        <li id="homeHref"><a href="" ng-click="manageMenu('home')" class="navbar-element">Home</a></li>
+        <li id="docHref"><a href="" ng-click="manageMenu('documentation')" class="navbar-element">Doc</a></li>
+        <li id="aboutHref"><a href="" ng-click="manageMenu('about')" class="navbar-element">About</a></li>   
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle navbar-element" data-toggle="dropdown">Demo Apps <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="" ng-click="manageMenu('subApp')" style="width:auto; margin-right:6px;">Subscription App</a></li>
+            <li><a href="" ng-click="manageMenu('pubApp')" style="width:auto; margin-right:6px;">Publication App</a></li>             
+          </ul>
+        </li>                 
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img gravatar-src="'{{userId}}'" gravatar-size="40" class="profile-pic-small"> {{userId}} &nbsp;<b class="fa fa-caret-down"></b>
+<!--
+              <img src={{userImage}} class="profile-pic-small">
+              {{userId}} &nbsp;<b class="fa fa-caret-down"></b>
+-->
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="" ng-click="manageMenu('users')" style="width:auto; margin-right:6px;">Profile</a>
+            </li>
+            <li>
+              <a href="" ng-click="logOut()" style="width:auto; margin-right:6px;">Log Out</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div> <!-- /.container -->
+</nav> <!-- /.navbar -->
+<div class="col-md-9 workingArea" ng-include src="menuOption">
+   </div>
+</div>
+
