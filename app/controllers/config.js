@@ -30,71 +30,26 @@ angular.module('AEON.configuration',[])
 	.constant('config',{
 
 		/******************************************/
-		/*			 Global Config 			  */
+		/*            Global Config               */
 		/******************************************/
-		RECAPTCHA_PUBLIC_KEY: '',
+		RECAPTCHA_PUBLIC_KEY: 'YOUR_PUBLIC_KEY',
 		COOKIE_NAME: 'aeon.sid',
 		SESSION_EXPIRE_DAYS: 60,
 
 		/******************************************/
-		/*			 Localhost Config 			  */
+		/*                Config                  */
 		/******************************************/
 		// Note - AEON_HOST: Introduce just the domain without the 'http://'
-		// AEON_HOST: 'localhost',
-		// AEON_PORT: '3000',
-		// AEON_GUI_HOST: 'localhost',
-		// AEON_GUI_PORT: '8000',
-		// SUBSCRIPTION_HOST:'localhost',
-		// SUBSCRIPTION_PORT:'7789',		
+		AEON_HOST: '',
+		AEON_PORT: '',
+		AEON_GUI_HOST: '',
+		AEON_GUI_PORT: '',
+		SUBSCRIPTION_HOST:'',
+		SUBSCRIPTION_PORT:'',		
 
 
 		/******************************************/
-		/*      arisrv22.es.atos.net Config       */
-		/******************************************/
-		//AEON_HOST: 'api.lcb.atosresearch.eu',
-		//AEON_PORT: '80',
-		//AEON_GUI_HOST: 'lcb-gui.herokuapp.com',
-		//AEON_GUI_PORT: '80',
-		//SUBSCRIPTION_HOST:'sub.lcb.atosresearch.eu',
-		//SUBSCRIPTION_PORT:'443',
-		
-		
-
-		/******************************************/
-		/*             Heroku Config              */
-		/******************************************/
-		 AEON_HOST: 'lcb.herokuapp.com',		
-		 AEON_PORT: '80',
-		 AEON_GUI_HOST: 'lcb-gui.herokuapp.com',
-		 AEON_GUI_PORT: '80',		
-		 SUBSCRIPTION_HOST:'lcb-sub.herokuapp.com',
-		 SUBSCRIPTION_PORT:'80',						
-		 
-
-		/******************************************/
-		/* 		CAROUSEL SLIDES CONFIGURATION 	  */
-		/******************************************/
-//		AEON_CAROUSEL_SLIDES:[
-//			{
-//				image:'img/Ahlsell_logistik_2_1.jpg',
-//				text: 'Cloud services to facilitate real time communications\' needs'
-//			},
-//			{
-//				image:'img/cn_intermodal-11.jpg',
-//				text: 'Communicate applications and services through a real time network'
-//			},
-//			{
-//				image:'img/img-index3.jpg',
-//				text: 'Easy to use, easy to integrate in developments'
-//			},
-//			{
-//				image:'img/pixpandas6.jpg',
-//				text: 'Publish/Subscribe information through customized channels'
-//			}
-//		],
-
-		/******************************************/
-		/* 		FEATURES CONFIGURATION 	  */
+		/*        FEATURES CONFIGURATION          */
 		/******************************************/
 		FEATURES:[
 			{
@@ -120,15 +75,15 @@ angular.module('AEON.configuration',[])
 		],
 
 		/******************************************/
-		/* 		LIVE DEMO CONFIGURATION 	  */
+		/*         LIVE DEMO CONFIGURATION        */
 		/******************************************/		
 
-		LIVE_DEMO_PUBKEY:"",
-		LIVE_DEMO_SUBKEY:"",
+		LIVE_DEMO_PUBKEY:"PUB_URL",
+		LIVE_DEMO_SUBKEY:"SUB_URL",
 
 		
-        /******************************************/
-		/* 		QUICK START CONFIGURATION 	  */
+        	/******************************************/
+		/*       QUICK START CONFIGURATION        */
 		/******************************************/		
 		QUICK_START:[
 			{
@@ -149,7 +104,7 @@ angular.module('AEON.configuration',[])
 		],
 
 		/******************************************/
-		/* 			CONTACT CONFIGURATION 		  */
+		/*          CONTACT CONFIGURATION         */
 		/******************************************/
 		AEON_VERSION:'0.2',
 		AEON_COPYRIGHT: 'Copyright 2014 ATOS S.A.',
