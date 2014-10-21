@@ -32,7 +32,7 @@ angular.module('AEON.configuration',[])
 		/******************************************/
 		/*            Global Config               */
 		/******************************************/
-		RECAPTCHA_PUBLIC_KEY: 'YOUR_PUBLIC_KEY',
+        RECAPTCHA_PUBLIC_KEY: '6LfpRe4SAAAAAK55U_PfaYxvogR-jHGRMJQp8ArW',
 		COOKIE_NAME: 'aeon.sid',
 		SESSION_EXPIRE_DAYS: 60,
 
@@ -40,12 +40,12 @@ angular.module('AEON.configuration',[])
 		/*                Config                  */
 		/******************************************/
 		// Note - AEON_HOST: Introduce just the domain without the 'http://'
-		AEON_HOST: '',
-		AEON_PORT: '',
-		AEON_GUI_HOST: '',
-		AEON_GUI_PORT: '',
-		SUBSCRIPTION_HOST:'',
-		SUBSCRIPTION_PORT:'',		
+		AEON_HOST: 'localhost',
+		AEON_PORT: '3000',
+		AEON_GUI_HOST: 'localhost',
+		AEON_GUI_PORT: '9999',
+		SUBSCRIPTION_HOST:'localhost',
+		SUBSCRIPTION_PORT:'80',		
 
 
 		/******************************************/
@@ -78,8 +78,8 @@ angular.module('AEON.configuration',[])
 		/*         LIVE DEMO CONFIGURATION        */
 		/******************************************/		
 
-		LIVE_DEMO_PUBKEY:"PUB_URL",
-		LIVE_DEMO_SUBKEY:"SUB_URL",
+        LIVE_DEMO_PUBKEY:"6LfpRe4SAAAAAK55U_PfaYxvogR-jHGRMJQp8ArW",
+        LIVE_DEMO_SUBKEY:"6LfpRe4SAAAAACXMxzVFqtA39Q0m3VWFLZ-WBsCL",
 
 		
         	/******************************************/
@@ -106,7 +106,7 @@ angular.module('AEON.configuration',[])
 		/******************************************/
 		/*          CONTACT CONFIGURATION         */
 		/******************************************/
-		AEON_VERSION:'0.2',
+		AEON_VERSION:'0.2.1',
 		AEON_COPYRIGHT: 'Copyright 2014 ATOS S.A.',
 		ATOS_LOCATION: {
 			img:'img/findUs2.png',
