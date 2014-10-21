@@ -172,22 +172,14 @@ function loginCtrl($rootScope, $scope, $location, Cookies, $cookieStore, Authent
 
     //Manage the navigation bar
     $scope.manageMenu = function(option){
-
-        if(option=="home"){
+        if(option=="home")
             $rootScope.actualView = 'views/loginView.html'
-        }	
-
-        else if(option=="subApp"){
-            //$scope.menuOption = 'views/suscriptionApp.html';
-            window.open('indexSubDemo.html') ;
-        }	
-
-        else if(option=="pubApp"){
-            //$scope.menuOption = 'views/suscriptionApp.html';			
-            window.open('indexPubDemo.html') ;
-
-        }
-
+        else if(option=="subApp")
+            window.open('indexSubDemo.html');
+        else if(option=="pubApp")
+            window.open('indexPubDemo.html');
+        else if(option=="doc")
+            window.open('http://'+config.AEON_HOST+':'+config.AEON_PORT+'/public/doc/html/apidoc/apidoc.html');
     }
 
     //Watch the username. When it changes, hides the 'user invalid' label

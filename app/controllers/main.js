@@ -30,8 +30,13 @@ function mainCtrl($rootScope, $scope, $location, $window, Authentication, config
 
 	//Select the navType format for the menu
 	$scope.navType = 'pills';
-
 	$scope.menuOption = 'views/entities.html';
+	//set sdks to download using banner
+	$scope.sdks = config.QUICK_START;
+	for(var i = 0; i < $scope.sdks.length; i++){
+        $scope.sdks[i].href = 'http://'+config.AEON_HOST+':'+config.AEON_PORT+$scope.sdks[i].href;
+        $scope.sdks[i].example = 'http://'+config.AEON_HOST+':'+config.AEON_PORT+$scope.sdks[i].example;
+    }
 
 	//Menu options
 	$scope.tabsManagement = [

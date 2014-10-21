@@ -44,6 +44,17 @@
             <li><a href="" ng-click="manageMenu('subApp')" style="width:auto; margin-right:6px;">Subscription App</a></li>
             <li><a href="" ng-click="manageMenu('pubApp')" style="width:auto; margin-right:6px;">Publication App</a></li>             
           </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle navbar-element" data-toggle="dropdown">SDKs<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <span ng-repeat="lang in sdks">
+              <li><a href="{{lang.href}}" class="dropdown-item"style="width:auto; margin-right:6px;">{{lang.language}}</a></li>
+            </span>
+            <!--<li><a href="" ng-click="downloadSdk('java')" style="width:auto; margin-right:6px;">Java</a></li>
+            <li><a href="" ng-click="downloadSdk('javascript')" style="width:auto; margin-right:6px;">Javascript</a></li>
+            <li><a href="" ng-click="downloadSdk('nodejs')" style="width:auto; margin-right:6px;">NodeJS</a></li>-->        
+          </ul>
         </li>                 
       </ul>
       <ul class="nav navbar-nav navbar-right">
