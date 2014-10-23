@@ -590,8 +590,7 @@ function mapCtrl($scope, $rootScope, config, Cookies){
     function makeid(next)
     {
         var ip = '';
-
-        $.getJSON("http://jsonip.com?callback=?",function(data){				
+        $.getJSON("//jsonip.appspot.com/?callback",function(data){				
             ip = data.ip;
             var text = "liveDemo-"+ip+'-';
             var possible = "0123456789";

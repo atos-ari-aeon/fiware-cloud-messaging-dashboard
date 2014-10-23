@@ -35,7 +35,7 @@ app.factory('Authentication', function($http, $q, $location, $cookies, $cookieSt
 		isLoggedIn : function(){
 			var deferred = $q.defer();
 			//GET
-			$http.get(config.AEON_GUI_PROTOCOL + "://"+config.AEON_HOST+":"+config.AEON_PORT+"/users/user",{withCredentials:true}).success(function(responseData){
+			$http.get("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/users/user",{withCredentials:true}).success(function(responseData){
 				deferred.resolve(responseData);
 			}).error(function(responseData, status){	
 				responseData.httpStatus = status;											
