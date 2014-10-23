@@ -223,7 +223,6 @@ function shorterURL(url){
 */
 function configCtrl($scope, $rootScope, Entity, Channel, config, $location){
 
-    console.log("ejklejklejklejkle");
     $scope.pubURLLabel = false;
     $scope.noWriteable = false;
     $rootScope.startButtonDisabled = true;
@@ -282,8 +281,8 @@ function configCtrl($scope, $rootScope, Entity, Channel, config, $location){
                     channelName = channels[j].channelname;
                     channelPubURL = channels[j].pubID;
                     $scope.channelsAvailables.push({ "name": channelName,
-                                                    "pubURL": "http://" + config.AEON_HOST+":"+config.AEON_PORT+"/publish/" + channelPubURL,
-                                                    "shortPubURL": "http://.../subscribe/"  + channelPubURL
+                                                    "pubURL": "//" + config.AEON_HOST+":"+config.AEON_PORT+"/publish/" + channelPubURL,
+                                                    "shortPubURL": "//.../subscribe/"  + channelPubURL
                                                     //                                                    + channelPubURL.substring(0, 8) +"..." 
                                                     //                                                    + channelPubURL.substring(30, 35) + "..."
                                                    });
