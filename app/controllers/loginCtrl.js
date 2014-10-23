@@ -202,8 +202,8 @@ function loginCtrl($rootScope, $scope, $location, Cookies, $cookieStore, Authent
 
     $scope.quickStart = config.QUICK_START;
     for(var i = 0; i < $scope.quickStart.length; i++){
-        $scope.quickStart[i].href = 'http://'+config.AEON_HOST+':'+config.AEON_PORT+$scope.quickStart[i].href;
-        $scope.quickStart[i].example = 'http://'+config.AEON_HOST+':'+config.AEON_PORT+$scope.quickStart[i].example;
+        $scope.quickStart[i].href = '//'+config.AEON_HOST+':'+config.AEON_PORT+$scope.quickStart[i].href;
+        $scope.quickStart[i].example = '//'+config.AEON_HOST+':'+config.AEON_PORT+$scope.quickStart[i].example;
     }
 
     $scope.atosFindUs = config.ATOS_LOCATION;
@@ -563,7 +563,7 @@ function mapCtrl($scope, $rootScope, config, Cookies){
     var pubUrl = '//'+config.AEON_HOST+':'+config.AEON_PORT+'/publish/'+config.LIVE_DEMO_PUBKEY;
     var subUrl = '//'+config.AEON_HOST+':'+config.AEON_PORT+'/subscribe/'+config.LIVE_DEMO_SUBKEY;	
 
-    var iconURLPrefix = 'http://maps.google.com/mapfiles/ms/icons/';
+    var iconURLPrefix = '//maps.google.com/mapfiles/ms/icons/';
 
     var icons = [
         iconURLPrefix + 'red-dot.png',
@@ -625,7 +625,7 @@ function mapCtrl($scope, $rootScope, config, Cookies){
     function setDataToMap(message, channel){		
 
         if ((message.icon == null) || (message.icon == undefined))
-            var iconType = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+            var iconType = "//maps.google.com/mapfiles/ms/icons/red-dot.png";
         else
             var iconType = icons[message.icon];
 
@@ -669,7 +669,6 @@ function mapCtrl($scope, $rootScope, config, Cookies){
                     subscribe(sdkSub);
                 });
 
-                // console.log(subscriptionData);
             });
 
         }
@@ -679,8 +678,6 @@ function mapCtrl($scope, $rootScope, config, Cookies){
             sdkSub = new AeonSDK(subUrl, subscriptionData);
 
             subscribe(sdkSub);
-
-            // console.log(subscriptionData)
         }	
 
         myIcon = Math.floor(Math.random()*12);
