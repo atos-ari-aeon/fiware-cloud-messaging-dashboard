@@ -560,8 +560,8 @@ function featuresCtrl($scope, config){
 
 function mapCtrl($scope, $rootScope, config, Cookies){
 
-    var pubUrl = 'http://'+config.AEON_HOST+':'+config.AEON_PORT+'/publish/'+config.LIVE_DEMO_PUBKEY;
-    var subUrl = 'http://'+config.AEON_HOST+':'+config.AEON_PORT+'/subscribe/'+config.LIVE_DEMO_SUBKEY;	
+    var pubUrl = '//'+config.AEON_HOST+':'+config.AEON_PORT+'/publish/'+config.LIVE_DEMO_PUBKEY;
+    var subUrl = '//'+config.AEON_HOST+':'+config.AEON_PORT+'/subscribe/'+config.LIVE_DEMO_SUBKEY;	
 
     var iconURLPrefix = 'http://maps.google.com/mapfiles/ms/icons/';
 
@@ -663,7 +663,6 @@ function mapCtrl($scope, $rootScope, config, Cookies){
         if(data == undefined){			
             generateSubscription(function(data){
                 subscriptionData = data;
-
                 Cookies.setCookie('aeon_subscription', Base64.encode(JSON.stringify(subscriptionData))).then(function(){
                     sdkSub = new AeonSDK(subUrl, subscriptionData);
 
@@ -675,8 +674,8 @@ function mapCtrl($scope, $rootScope, config, Cookies){
 
         }
         else{
+            
             subscriptionData = JSON.parse(Base64.decode(data));			
-
             sdkSub = new AeonSDK(subUrl, subscriptionData);
 
             subscribe(sdkSub);
