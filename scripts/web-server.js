@@ -62,8 +62,8 @@ function HttpServer(handlers) {
 
     if (config.SSL) {
         console.log("Reading certificate");
-        var pkey = fs.readFileSync('cert/key.pem');
-        var pcert = fs.readFileSync('cert/cert.pem');
+        var pkey = fs.readFileSync(config.key);
+        var pcert = fs.readFileSync(config.cert);
         var options = {
             key: pkey,
             cert: pcert
