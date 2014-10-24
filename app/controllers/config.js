@@ -43,9 +43,9 @@ angular.module('AEON.configuration',[])
 		AEON_HOST: 'localhost',
 		AEON_PORT: '3000',
 		AEON_GUI_HOST: 'localhost',
-		AEON_GUI_PORT: '9999',
+		AEON_GUI_PORT: '8000',
 		SUBSCRIPTION_HOST:'localhost',
-		SUBSCRIPTION_PORT:'80',		
+		SUBSCRIPTION_PORT:'7789',		
 
 
 		/******************************************/
