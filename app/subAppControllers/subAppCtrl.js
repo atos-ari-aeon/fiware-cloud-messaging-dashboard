@@ -120,8 +120,8 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
                     channelName = channels[j].channelname;
                     channelSubURL = channels[j].subID;
                     $scope.channelsAvailables.push({ "name": channelName,
-                                                    "subURL": "http://" + config.AEON_HOST+":"+config.AEON_PORT+"/subscribe/" + channelSubURL,
-                                                    "shortSubURL": "http://.../subscribe/" + channelSubURL
+                                                    "subURL": "//" + config.AEON_HOST+":"+config.AEON_PORT+"/subscribe/" + channelSubURL,
+                                                    "shortSubURL": "//.../subscribe/" + channelSubURL
                                                     //                                                    + channelSubURL.substring(0, 8) +"..." 
                                                     //                                                    + channelSubURL.substring(30, 35) + "..."
                                                    });
@@ -197,11 +197,11 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
 
 
         if(channel == 0)
-            var iconType = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+            var iconType = "//maps.google.com/mapfiles/ms/icons/red-dot.png";
         else if(channel == 1)
-            var iconType = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+            var iconType = "//maps.google.com/mapfiles/ms/icons/blue-dot.png";
         else
-            var iconType = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+            var iconType = "//maps.google.com/mapfiles/ms/icons/green-dot.png";
 
         var marker = new google.maps.Marker({
             map:$rootScope.map,

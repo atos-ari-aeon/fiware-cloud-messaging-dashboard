@@ -22,10 +22,12 @@
 
 //Constants
 var config = {
-	SUBSCRIPTION_HOST : 'lcb-sub.herokuapp.com',
-	SUBSCRIPTION_PORT : '80',
-	REST_SERVER_HOST:'lcb.herokuapp.com',
-	REST_SERVER_PORT:'80'
+	SUBSCRIPTION_PROTOCOL: 'https',
+	SUBSCRIPTION_HOST : 'localhost',
+	SUBSCRIPTION_PORT : '7789',
+	REST_SERVER_PROTOCOL : 'https',
+	REST_SERVER_HOST:'localhost',
+	REST_SERVER_PORT:'3000'
 }
 
 //USER Response Errors
@@ -237,9 +239,8 @@ function subscribeToQueue(myObject, subscriptionData, control, deliveredMessage)
 }
 
 function AeonSDK(url, subscriptionData){
-
-	this.socket_server_endpoint = 'http://'+config.SUBSCRIPTION_HOST+':'+config.SUBSCRIPTION_PORT;
-	this.rest_server_endpoint = 'http://'+config.REST_SERVER_HOST+':'+config.REST_SERVER_PORT;
+	this.socket_server_endpoint = config.SUBSCRIPTION_PROTOCOL + '://'+config.SUBSCRIPTION_HOST+':'+config.SUBSCRIPTION_PORT;
+	this.rest_server_endpoint = config.REST_SERVER_PROTOCOL + '://'+config.REST_SERVER_HOST+':'+config.REST_SERVER_PORT;
 	this.mode = '';
 	this.subscription = null;
 	this.control = null;
@@ -298,7 +299,6 @@ AeonSDK.prototype.subscribe = function subscribe(deliveredMessage, control){
 
 			//Connect to the SocketIO server
 			this.socket = io.connect(socketServer, {'force new connection': true});
-
 
 			//Subscribe throught the API to the mongoDB
 			doHTTPRequest(this.url,'GET', null, function(response){
@@ -386,7 +386,7 @@ AeonSDK.prototype.publish = function publish(data,control){
 var doHTTPRequest = function doHTTPRequest(url, method, data, next){
 
 	var http = null;
-
+	console.log(url);
 	http = new XMLHttpRequest();
 
 	http.addEventListener('error', function(error){

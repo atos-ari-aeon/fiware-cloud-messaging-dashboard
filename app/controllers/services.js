@@ -25,421 +25,454 @@
 	Module to manage the services invocation
 */
 
-var app = angular.module("AEON.services", ['AEON.configuration','ngResource','ngCookies']);
+var app = angular.module("AEON.services", ['AEON.configuration', 'ngResource', 'ngCookies']);
 
 //Authentication services
-app.factory('Authentication', function($http, $q, $location, $cookies, $cookieStore, $rootScope, config){
+app.factory('Authentication', function ($http, $q, $location, $cookies, $cookieStore, $rootScope, config) {
 
-	return {
-		//get the user if logged in
-		isLoggedIn : function(){
-			var deferred = $q.defer();
-			//GET
-			$http.get("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/users/user",{withCredentials:true}).success(function(responseData){
-				deferred.resolve(responseData);
-			}).error(function(responseData, status){	
-				responseData.httpStatus = status;											
-				deferred.reject(responseData);
-			});
-			return deferred.promise;
-		},
-		//Authentication
-		login : function(user){
+    return {
+        //get the user if logged in
+        isLoggedIn: function () {
+            var deferred = $q.defer();
+            //GET
+            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/users/user", {
+                withCredentials: true
+            }).success(function (responseData) {
+                deferred.resolve(responseData);
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
+            });
+            return deferred.promise;
+        },
+        //Authentication
+        login: function (user) {
 
-			var deferred = $q.defer();
+            var deferred = $q.defer();
 
-			//Set up the headers
-			$http.defaults.headers.post['Content-Type'] = 'application/json';
-			$http.defaults.headers.post['Set-Cookie'] = '';
-						
-			//POST
-			$http.post("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/login", user, {withCredentials:true}).success(function(responseData,status, headers, config){											
-	
-				deferred.resolve(responseData);
+            //Set up the headers
+            $http.defaults.headers.post['Content-Type'] = 'application/json';
+            $http.defaults.headers.post['Set-Cookie'] = '';
 
-			}).error(function(responseData, status){
-				responseData.httpStatus = status;
-				deferred.reject(responseData);
+            //POST
+            $http.post("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/login", user, {
+                withCredentials: true
+            }).success(function (responseData, status, headers, config) {
 
-			});
+                deferred.resolve(responseData);
 
-			return deferred.promise;
-		},
-		//Logout
-		logout: function(){
-			var deferred = $q.defer();
-			$http.get("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/logout", {withCredentials:true}).success(function(responseData,status, headers, config){											
-				deferred.resolve(responseData);
-			}).error(function(responseData, status){				
-				responseData.httpStatus = status;
-				deferred.reject(responseData);
-			});
-			return deferred.promise;
-		}
-	}
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
+
+            });
+
+            return deferred.promise;
+        },
+        //Logout
+        logout: function () {
+            var deferred = $q.defer();
+            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/logout", {
+                withCredentials: true
+            }).success(function (responseData, status, headers, config) {
+                deferred.resolve(responseData);
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
+            });
+            return deferred.promise;
+        }
+    }
 });
 
 //Services for cookie management
-app.factory('Cookies', function($q, $timeout){
-		return {
-				getCookie: function(name){
-					 var deferred = $q.defer();
-					 $timeout(function() {
-							 deferred.resolve($.cookie(name));
-					 }, 0);
-					 return deferred.promise;
-				},
+app.factory('Cookies', function ($q, $timeout) {
+    return {
+        getCookie: function (name) {
+            var deferred = $q.defer();
+            $timeout(function () {
+                deferred.resolve($.cookie(name));
+            }, 0);
+            return deferred.promise;
+        },
 
-				getAllCookies: function(){
-						return $.cookie();
-				},
+        getAllCookies: function () {
+            return $.cookie();
+        },
 
-				setCookie: function(name, value){
-					var deferred = $q.defer();
-					$timeout(function() {
-							deferred.resolve($.cookie(name, value));
-					}, 0);
-					return deferred.promise;            
-				},
+        setCookie: function (name, value) {
+            var deferred = $q.defer();
+            $timeout(function () {
+                deferred.resolve($.cookie(name, value));
+            }, 0);
+            return deferred.promise;
+        },
 
-				deleteCookie: function(name){
-						return $.removeCookie(name);
-				},
-				setCookieNull: function(name){
-					return $.cookie(name, null, {path: '/'});
-				},
-				setExpDate: function(name, days){
-					return this.getCookie(name).then(function(value){
-						return $.cookie(name, value, {path: '/', expires: days});
-					});
-				}
-		}
+        deleteCookie: function (name) {
+            return $.removeCookie(name);
+        },
+        setCookieNull: function (name) {
+            return $.cookie(name, null, {
+                path: '/'
+            });
+        },
+        setExpDate: function (name, days) {
+            return this.getCookie(name).then(function (value) {
+                return $.cookie(name, value, {
+                    path: '/',
+                    expires: days
+                });
+            });
+        }
+    }
 });
 
 //Services for the user management
-app.factory('Users', function($http, $q, $rootScope, config){
-	return {
-		//List the users
-		getUsers: function(){
-			var deferred = $q.defer();
+app.factory('Users', function ($http, $q, $rootScope, config) {
+    return {
+        //List the users
+        getUsers: function () {
+            var deferred = $q.defer();
 
-			//Set up the headers
-			$http.defaults.headers.post['Content-Type'] = 'application/json';			
+            //Set up the headers
+            $http.defaults.headers.post['Content-Type'] = 'application/json';
 
-			//GET
-			$http.get("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/users/",{withCredentials:true}).success(function(responseData){
-				
-				deferred.resolve(responseData);
+            //GET
+            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/users/", {
+                withCredentials: true
+            }).success(function (responseData) {
 
-			}).error(function(responseData, status){												
-				responseData.httpStatus = status;
-				deferred.reject(responseData);
+                deferred.resolve(responseData);
 
-			});
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
 
-			return deferred.promise;
-		},
-		//Creates a new user
-		newUser: function(user){
-			var deferred = $q.defer();
-			//Set up the headers
-			$http.defaults.headers.post['Content-Type'] = 'application/json';
-			$http.post("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/users", user).success(function(responseData, status){
-				responseData.httpStatus = status;
-				deferred.resolve(responseData);
-			}).error(function(responseData, status){		
-				responseData.httpStatus = status;
-				deferred.reject(responseData);
-			});
-			return deferred.promise;
-		},
-		//Gets user info
-		getUser: function(id){
-			var deferred = $q.defer();
+            });
 
-			//Set up the headers
-			$http.defaults.headers.post['Content-Type'] = 'application/json';
+            return deferred.promise;
+        },
+        //Creates a new user
+        newUser: function (user) {
+            var deferred = $q.defer();
+            //Set up the headers
+            $http.defaults.headers.post['Content-Type'] = 'application/json';
+            $http.post("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/users", user).success(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.resolve(responseData);
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
+            });
+            return deferred.promise;
+        },
+        //Gets user info
+        getUser: function (id) {
+            var deferred = $q.defer();
 
-			//GET
-			$http.get("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/users/"+id,{withCredentials:true}).success(function(responseData){
-				
-				deferred.resolve(responseData);
+            //Set up the headers
+            $http.defaults.headers.post['Content-Type'] = 'application/json';
 
-			}).error(function(responseData, status){
-				responseData.httpStatus = status;
-				deferred.reject(responseData);
+            //GET
+            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/users/" + id, {
+                withCredentials: true
+            }).success(function (responseData) {
 
-			});
+                deferred.resolve(responseData);
 
-			return deferred.promise;
-		},
-		//Resets user password
-		resetPassword: function(userId){
-			var deferred = $q.defer();
-			$http.get("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/users/"+userId+"/rememberPassword").success(function(responseData, status){
-				responseData.httpStatus = status;
-				deferred.resolve(responseData);
-			}).error(function(responseData, status){
-				responseData.httpStatus = status;
-				deferred.reject(responseData);
-			});
-			return deferred.promise;
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
 
-		},
-		createPassword: function (user, tempCode){
-			var deferred = $q.defer();
-			//Set up the headers
-			$http.defaults.headers.post['Content-Type'] = 'application/json';
-			$http.put("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/users/"+user.username+"/rememberPassword/"+tempCode, user).success(function(responseData, status){
-				responseData.httpStatus = status;
-				deferred.resolve(responseData);
-			}).error(function(responseData, status){		
-				responseData.httpStatus = status;
-				deferred.reject(responseData);
-			});
+            });
 
-			return deferred.promise;
-		},
-		changePassword: function(username, user){
-			var deferred = $q.defer();
+            return deferred.promise;
+        },
+        //Resets user password
+        resetPassword: function (userId) {
+            var deferred = $q.defer();
+            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/users/" + userId + "/rememberPassword").success(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.resolve(responseData);
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
+            });
+            return deferred.promise;
 
-			//Set up the headers
-			$http.defaults.headers.post['Content-Type'] = 'application/json';
+        },
+        createPassword: function (user, tempCode) {
+            var deferred = $q.defer();
+            //Set up the headers
+            $http.defaults.headers.post['Content-Type'] = 'application/json';
+            $http.put("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/users/" + user.username + "/rememberPassword/" + tempCode, user).success(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.resolve(responseData);
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
+            });
 
-			//PUT
-			$http.put("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/users/"+username+"/updatePassword", user, {withCredentials:true}).success(function(responseData){
+            return deferred.promise;
+        },
+        changePassword: function (username, user) {
+            var deferred = $q.defer();
 
-				deferred.resolve(responseData);
+            //Set up the headers
+            $http.defaults.headers.post['Content-Type'] = 'application/json';
 
-			}).error(function(responseData, status){		
-				responseData.httpStatus = status;
-				deferred.reject(responseData);
+            //PUT
+            $http.put("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/users/" + username + "/updatePassword", user, {
+                withCredentials: true
+            }).success(function (responseData) {
 
-			});
+                deferred.resolve(responseData);
 
-			return deferred.promise;
-		}
-	}
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
+
+            });
+
+            return deferred.promise;
+        }
+    }
 })
 
 
 //Services for the entities management
-app.factory('Entity', function($http, $q, $rootScope, config){
-	return {
-		//List of entities
-		getEntities: function(){
-			var deferred = $q.defer();
+app.factory('Entity', function ($http, $q, $rootScope, config) {
+    return {
+        //List of entities
+        getEntities: function () {
+            var deferred = $q.defer();
 
-			//Set up the headers
-			$http.defaults.headers.post['Content-Type'] = 'application/json';			
+            //Set up the headers
+            $http.defaults.headers.post['Content-Type'] = 'application/json';
 
-			//GET
-			$http.get("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/entities/",{withCredentials:true}).success(function(responseData){
-				
-				deferred.resolve(responseData);
+            //GET
+            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/", {
+                withCredentials: true
+            }).success(function (responseData) {
 
-			}).error(function(responseData, status){													
-				responseData.httpStatus = status;
-				deferred.reject(responseData);
+                deferred.resolve(responseData);
 
-			});
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
 
-			return deferred.promise;
-		},
-		//Creates a new entity
-		newEntity: function(entity){
-			var deferred = $q.defer();
+            });
 
-			//Set up the headers
-			$http.defaults.headers.post['Content-Type'] = 'application/json';
+            return deferred.promise;
+        },
+        //Creates a new entity
+        newEntity: function (entity) {
+            var deferred = $q.defer();
 
-			//POST
-			$http.post("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/entities", entity,{withCredentials:true}).success(function(responseData){
-				deferred.resolve(responseData);
+            //Set up the headers
+            $http.defaults.headers.post['Content-Type'] = 'application/json';
 
-			}).error(function(responseData, status){
-				responseData.httpStatus = status;
-				deferred.reject(responseData);
+            //POST
+            $http.post("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities", entity, {
+                withCredentials: true
+            }).success(function (responseData) {
+                deferred.resolve(responseData);
 
-			});
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
 
-			return deferred.promise;
-		},
-		//Gets entity info
-		getEntity: function(id){
-			var deferred = $q.defer();
+            });
 
-			//Set up the headers
-			$http.defaults.headers.post['Content-Type'] = 'application/json';
+            return deferred.promise;
+        },
+        //Gets entity info
+        getEntity: function (id) {
+            var deferred = $q.defer();
 
-			//GET
-			$http.get("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/entities/"+id,{withCredentials:true}).success(function(responseData){
-				deferred.resolve(responseData);
+            //Set up the headers
+            $http.defaults.headers.post['Content-Type'] = 'application/json';
 
-			}).error(function(responseData, status){						
-				responseData.httpStatus = status;
-				deferred.reject(responseData);
+            //GET
+            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/" + id, {
+                withCredentials: true
+            }).success(function (responseData) {
+                deferred.resolve(responseData);
 
-			});
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
 
-			return deferred.promise;
-		},
-		//Update entity
-		updateEntity: function(entity){
-			var deferred = $q.defer();
-			//Set up the headers
-			$http.defaults.headers.post['Content-Type'] = 'application/json';
-			//PUT
-			$http.put("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/entities/"+entity._id, entity, {withCredentials:true}).success(function(responseData){
-				deferred.resolve(responseData);
-			}).error(function(responseData, status){	
-				responseData.httpStatus = status;					
-				deferred.reject(responseData);
-			});
-			return deferred.promise;
-		},
-		//Deletes entity
-		deleteEntity: function(entity){
-			var deferred = $q.defer();
-			//Set up the headers
-			$http.defaults.headers.post['Content-Type'] = 'application/json';
-			//DELETE
-			// $http.delete("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/entities/"+entity._id, {withCredentials:true}).success(function(responseData){
-			// 	deferred.resolve(responseData);
-			// }).error(function(responseData){						
-			// 	deferred.reject(responseData);
-			// });
+            });
 
-			$http({
-				method:'DELETE',
-				url:"http://"+config.AEON_HOST+":"+config.AEON_PORT+"/entities/"+entity._id,
-				withCredentials:true
-			}).success(function(responseData){
-				deferred.resolve(responseData);
-			}).error(function(responseData, status){
-				responseData.httpStatus = status;						
-				deferred.reject(responseData);
-			});
+            return deferred.promise;
+        },
+        //Update entity
+        updateEntity: function (entity) {
+            var deferred = $q.defer();
+            //Set up the headers
+            $http.defaults.headers.post['Content-Type'] = 'application/json';
+            //PUT
+            $http.put("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/" + entity._id, entity, {
+                withCredentials: true
+            }).success(function (responseData) {
+                deferred.resolve(responseData);
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
+            });
+            return deferred.promise;
+        },
+        //Deletes entity
+        deleteEntity: function (entity) {
+            var deferred = $q.defer();
+            //Set up the headers
+            $http.defaults.headers.post['Content-Type'] = 'application/json';
+            //DELETE
+            // $http.delete("//"+config.AEON_HOST+":"+config.AEON_PORT+"/entities/"+entity._id, {withCredentials:true}).success(function(responseData){
+            // 	deferred.resolve(responseData);
+            // }).error(function(responseData){						
+            // 	deferred.reject(responseData);
+            // });
 
-			return deferred.promise;
-		}
-	}
+            $http({
+                method: 'DELETE',
+                url: "//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/" + entity._id,
+                withCredentials: true
+            }).success(function (responseData) {
+                deferred.resolve(responseData);
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
+            });
+
+            return deferred.promise;
+        }
+    }
 
 })
 
 //Services for the channels
-app.factory('Channel', function($http, $q, $rootScope, config){
-	return {
-		//List of channels
-		getChannels: function(entity_id){
-			var deferred = $q.defer();
+app.factory('Channel', function ($http, $q, $rootScope, config) {
+    return {
+        //List of channels
+        getChannels: function (entity_id) {
+            var deferred = $q.defer();
 
-			//Set up the headers
-			$http.defaults.headers.post['Content-Type'] = 'application/json';
-			
-			//GET
-			$http.get("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/entities/"+entity_id+'/channels/',{withCredentials:true}).success(function(responseData){
-				
-				deferred.resolve(responseData);
+            //Set up the headers
+            $http.defaults.headers.post['Content-Type'] = 'application/json';
 
-			}).error(function(responseData, status){
-				responseData.httpStatus = status;
-				deferred.reject(responseData);
+            //GET
+            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/" + entity_id + '/channels/', {
+                withCredentials: true
+            }).success(function (responseData) {
 
-			});
+                deferred.resolve(responseData);
 
-			return deferred.promise;
-		},
-		//Creates a new channel
-		newChannel: function(entity_id, channel){
-			var deferred = $q.defer();
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
 
-			//Set up the headers
-			$http.defaults.headers.post['Content-Type'] = 'application/json';
-			
-			//POST
-			$http.post("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/entities/"+entity_id+"/channels/", channel,{withCredentials:true}).success(function(responseData){
-				
-				deferred.resolve(responseData);
+            });
 
-			}).error(function(responseData, status){
-				responseData.httpStatus = status;
-				deferred.reject(responseData);
+            return deferred.promise;
+        },
+        //Creates a new channel
+        newChannel: function (entity_id, channel) {
+            var deferred = $q.defer();
 
-			});
+            //Set up the headers
+            $http.defaults.headers.post['Content-Type'] = 'application/json';
 
-			return deferred.promise;
-		},
-		//Get channel info
-		getChannel: function(entity_id, channel_id){
-			var deferred = $q.defer();
+            //POST
+            $http.post("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/" + entity_id + "/channels/", channel, {
+                withCredentials: true
+            }).success(function (responseData) {
 
-			//Set up the headers
-			$http.defaults.headers.post['Content-Type'] = 'application/json';
-			
-			//GET
-			$http.get("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/entities/"+entity_id+"/channels/"+channel_id,{withCredentials:true}).success(function(responseData){
-				
-				deferred.resolve(responseData);
+                deferred.resolve(responseData);
 
-			}).error(function(responseData, status){
-				responseData.httpStatus = status;
-				deferred.reject(responseData);
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
 
-			});
+            });
 
-			return deferred.promise;
-		},
-		//Update channel
-		updateChannel: function(entityId, channel){
-			var deferred = $q.defer();
-			//Set up the headers
-			$http.defaults.headers.post['Content-Type'] = 'application/json';
-			//PUT
-			$http.put("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/entities/"+entityId+"/channels/"+channel._id, channel, {withCredentials:true}).success(function(responseData){
-				deferred.resolve(responseData);
-			}).error(function(responseData, status){
-				responseData.httpStatus = status;						
-				deferred.reject(responseData);
-			});
-			return deferred.promise;
-		},
-		//Deletes channel
-		deleteChannel: function(entityId, channelId){
-			var deferred = $q.defer();
-			//Set up the headers
-			$http.defaults.headers.post['Content-Type'] = 'application/json';
-			//DELETE
-			// $http.delete("http://"+config.AEON_HOST+":"+config.AEON_PORT+"/entities/"+entityId+"/channels/"+channelId, {withCredentials:true}).success(function(responseData){
-			// 	deferred.resolve(responseData);
-			// }).error(function(responseData){						
-			// 	deferred.reject(responseData);
-			// });
+            return deferred.promise;
+        },
+        //Get channel info
+        getChannel: function (entity_id, channel_id) {
+            var deferred = $q.defer();
 
-			$http({
-				method:'DELETE',
-				url:"http://"+config.AEON_HOST+":"+config.AEON_PORT+"/entities/"+entityId+"/channels/"+channelId,
-				withCredentials:true
-			}).success(function(responseData){
-				deferred.resolve(responseData);
-			}).error(function(responseData, status){
-				responseData.httpStatus = status;						
-				deferred.reject(responseData);
-			});
+            //Set up the headers
+            $http.defaults.headers.post['Content-Type'] = 'application/json';
 
-			return deferred.promise;
-		}
-	}
+            //GET
+            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/" + entity_id + "/channels/" + channel_id, {
+                withCredentials: true
+            }).success(function (responseData) {
+
+                deferred.resolve(responseData);
+
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
+
+            });
+
+            return deferred.promise;
+        },
+        //Update channel
+        updateChannel: function (entityId, channel) {
+            var deferred = $q.defer();
+            //Set up the headers
+            $http.defaults.headers.post['Content-Type'] = 'application/json';
+            //PUT
+            $http.put("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/" + entityId + "/channels/" + channel._id, channel, {
+                withCredentials: true
+            }).success(function (responseData) {
+                deferred.resolve(responseData);
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
+            });
+            return deferred.promise;
+        },
+        //Deletes channel
+        deleteChannel: function (entityId, channelId) {
+            var deferred = $q.defer();
+            //Set up the headers
+            $http.defaults.headers.post['Content-Type'] = 'application/json';
+            //DELETE
+            // $http.delete("//"+config.AEON_HOST+":"+config.AEON_PORT+"/entities/"+entityId+"/channels/"+channelId, {withCredentials:true}).success(function(responseData){
+            // 	deferred.resolve(responseData);
+            // }).error(function(responseData){						
+            // 	deferred.reject(responseData);
+            // });
+
+            $http({
+                method: 'DELETE',
+                url: "//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/" + entityId + "/channels/" + channelId,
+                withCredentials: true
+            }).success(function (responseData) {
+                deferred.resolve(responseData);
+            }).error(function (responseData, status) {
+                responseData.httpStatus = status;
+                deferred.reject(responseData);
+            });
+
+            return deferred.promise;
+        }
+    }
 
 });
 
-app.factory('alertManager', function() {
+app.factory('alertManager', function () {
     return {
         Alert: {},
-        raiseAlert: function(message, type) {
+        raiseAlert: function (message, type) {
             this.Alert.type = type;
-            this.Alert.message = message; 
-            this.Alert.showAlert = true;           
+            this.Alert.message = message;
+            this.Alert.showAlert = true;
         }
     };
 });
