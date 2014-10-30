@@ -25,10 +25,10 @@ var config = {
 	SUBSCRIPTION_PROTOCOL: 'https',
 	SUBSCRIPTION_HOST : 'localhost',
 	SUBSCRIPTION_PORT : '7789',
-	REST_SERVER_PROTOCOL : 'https',
-	REST_SERVER_HOST:'localhost',
-	REST_SERVER_PORT:'3000'
-}
+	// REST_SERVER_PROTOCOL : 'https',
+	// REST_SERVER_HOST:'localhost',
+	// REST_SERVER_PORT:'3000'
+};
 
 //USER Response Errors
 var UNKNWON_ERROR = {};
@@ -163,7 +163,7 @@ function getSubID(url){
 
 var controlEmpty = function controlEmpty(){
 
-}
+};
 
 //function internalControl(response, control, socket){
 
@@ -177,7 +177,7 @@ var controlEmpty = function controlEmpty(){
 //}
 
 function setControl(control){
-	if(control == null)
+	if(control === null)
 			control = controlEmpty;
 
 	return control;
@@ -238,9 +238,17 @@ function subscribeToQueue(myObject, subscriptionData, control, deliveredMessage)
 	return localSocket;
 }
 
+function getServerEndpoint(url){
+
+	var parts = url.split('/');
+
+	return parts[2];
+}
+
 function AeonSDK(url, subscriptionData){
 	this.socket_server_endpoint = config.SUBSCRIPTION_PROTOCOL + '://'+config.SUBSCRIPTION_HOST+':'+config.SUBSCRIPTION_PORT;
-	this.rest_server_endpoint = config.REST_SERVER_PROTOCOL + '://'+config.REST_SERVER_HOST+':'+config.REST_SERVER_PORT;
+	//this.rest_server_endpoint = config.REST_SERVER_PROTOCOL + '://'+config.REST_SERVER_HOST+':'+config.REST_SERVER_PORT;
+	this.rest_server_endpoint = getServerEndpoint(url);
 	this.mode = '';
 	this.subscription = null;
 	this.control = null;
@@ -257,11 +265,15 @@ function AeonSDK(url, subscriptionData){
 		if(subscriptionData != undefined){
 			this.subscriptionData = subscriptionData;
 
-			this.mode = "subscribe";
+			if(this.subscriptionData.id == undefined || this.subscriptionData.desc == undefined)
+				this.mode = "error";
+			else{
+				this.mode = "subscribe";
 
-			this.url = url;
+				this.url = url;
 
-			this.url += '?id='+this.subscriptionData.id+'&desc='+this.subscriptionData.desc;
+				this.url += '?id='+this.subscriptionData.id+'&desc='+this.subscriptionData.desc;
+			}
 		}
 		else
 			this.mode = "error";
@@ -291,7 +303,7 @@ AeonSDK.prototype.subscribe = function subscribe(deliveredMessage, control){
 		// else
 		// 	this.control = controlEmpty;
 
-		if(this.subscriptionData != null){
+		if(this.subscriptionData !== null){
 
 			this.subID = getSubID(this.url);
 
