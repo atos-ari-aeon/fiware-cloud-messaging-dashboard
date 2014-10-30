@@ -1,6 +1,6 @@
-/** 
+/**
     Copyright (C) 2014 ATOS
- 
+
     This file is part of AEON.
 
     This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  
+
     Authors: Javier García Hernández (javier.garcia@atos.net)
              Baris Kara (baris.kara@atos.net)
 
@@ -45,7 +45,7 @@ angular.module('AEON.configuration',[])
 		AEON_GUI_HOST: 'localhost',
 		AEON_GUI_PORT: '8000',
 		SUBSCRIPTION_HOST:'localhost',
-		SUBSCRIPTION_PORT:'7789',		
+		SUBSCRIPTION_PORT:'7789',
 
 
 		/******************************************/
@@ -76,15 +76,15 @@ angular.module('AEON.configuration',[])
 
 		/******************************************/
 		/*         LIVE DEMO CONFIGURATION        */
-		/******************************************/		
+		/******************************************/
 
-        LIVE_DEMO_PUBKEY:"6LfpRe4SAAAAAK55U_PfaYxvogR-jHGRMJQp8ArW",
-        LIVE_DEMO_SUBKEY:"6LfpRe4SAAAAACXMxzVFqtA39Q0m3VWFLZ-WBsCL",
+        LIVE_DEMO_PUBKEY:"076589a5-b8c9-4cec-ae74-062efa34520b",
+        LIVE_DEMO_SUBKEY:"87de2198-0904-4733-a7d4-85aebef839b9",
 
-		
+
         	/******************************************/
 		/*       QUICK START CONFIGURATION        */
-		/******************************************/		
+		/******************************************/
 		QUICK_START:[
 			{
 				language:'Java',
@@ -95,7 +95,7 @@ angular.module('AEON.configuration',[])
 				language:'Javascript',
 				href:'/public/downloads/AeonSDK-Javascript_0.2.0.tgz',
 				example: '/public/doc/html/quickstart/javascript.html'
-			},			
+			},
 			{
 				language:'Node JS',
 				href:'/public/downloads/AeonSDK-nodejs_0.2.0.tgz',
