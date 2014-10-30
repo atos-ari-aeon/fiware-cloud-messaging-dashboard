@@ -14,21 +14,10 @@
   * limitations under the License.
   *
   * Authors: Javier García Hernández (javier.garcia@atos.net)
-
   */
 
 //var io = require('socket.io-client');
 // var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-
-//Constants
-var config = {
-	SUBSCRIPTION_PROTOCOL: 'https',
-	SUBSCRIPTION_HOST : 'localhost',
-	SUBSCRIPTION_PORT : '7789',
-	// REST_SERVER_PROTOCOL : 'https',
-	// REST_SERVER_HOST:'localhost',
-	// REST_SERVER_PORT:'3000'
-};
 
 //USER Response Errors
 var UNKNWON_ERROR = {};
@@ -128,27 +117,6 @@ function controlTranslator(message){
 	}
 }
 
-//Loads the socket.io library
-// jQuery(document).ready(function($){
-//      /**
-//      * function to load a given js file
-//      * tip from fisherman: you can use jquery function instead of this custom function
-//      * http://api.jquery.com/jQuery.getScript
-//      */
-//     loadJS = function(src) {
-//        var jsLink = $("<script>");
-//        $("head").append(jsLink);
-//        jsLink.attr({
-//            type: "text/javascript",
-//            src: src
-//        });
-//     };
-
-//     // load the js file
-//     loadJS("http://"+config.SUBSCRIPTION_HOST+":"+config.SUBSCRIPTION_PORT+"/socket.io/socket.io.js");
-
-// });
-
 function getSubID(url){
 	//Example URL: http://endpoint:port/subscribe/:subID
 	try{
@@ -164,17 +132,6 @@ function getSubID(url){
 var controlEmpty = function controlEmpty(){
 
 };
-
-//function internalControl(response, control, socket){
-
-	//Unsubscribe ok
-	// if(response != undefined){
-	// 	if(response.code == 450)
-	// 		socket.removeAllListeners();
-	// }
-
-//	control(controlTranslator(response));
-//}
 
 function setControl(control){
 	if(control === null)
@@ -246,9 +203,9 @@ function getServerEndpoint(url){
 }
 
 function AeonSDK(url, subscriptionData){
-	this.socket_server_endpoint = config.SUBSCRIPTION_PROTOCOL + '://'+config.SUBSCRIPTION_HOST+':'+config.SUBSCRIPTION_PORT;
-	//this.rest_server_endpoint = config.REST_SERVER_PROTOCOL + '://'+config.REST_SERVER_HOST+':'+config.REST_SERVER_PORT;
+
 	this.rest_server_endpoint = getServerEndpoint(url);
+
 	this.mode = '';
 	this.subscription = null;
 	this.control = null;
@@ -300,31 +257,32 @@ AeonSDK.prototype.subscribe = function subscribe(deliveredMessage, control){
 
 	if(this.mode == 'subscribe'){
 
-		// else
-		// 	this.control = controlEmpty;
-
 		if(this.subscriptionData !== null){
 
 			this.subID = getSubID(this.url);
 
-			var socketServer = this.socket_server_endpoint;
+			//var socketServer = this.socket_server_endpoint;
 
-			//Connect to the SocketIO server
-			this.socket = io.connect(socketServer, {'force new connection': true});
+			doHTTPRequest('//'+this.rest_server_endpoint+'/subscribe/config','GET', null, function(response){
+				var socketServer = response.result[0].socket_server;
 
-			//Subscribe throught the API to the mongoDB
-			doHTTPRequest(this.url,'GET', null, function(response){
+				//Connect to the SocketIO server
+				myObject.socket = io.connect(socketServer, {'force new connection': true});
 
-				if(response.code == 200){
+				//Subscribe throught the API to the mongoDB
+				doHTTPRequest(myObject.url,'GET', null, function(response){
 
-					//Subscribe to a queue
-					this.socket = subscribeToQueue(myObject, response.result[0], myObject.control, deliveredMessage);
+					if(response.code == 200){
 
-				}
-				else
-					myObject.control(controlTranslator(response));
+						//Subscribe to a queue
+						this.socket = subscribeToQueue(myObject, response.result[0], myObject.control, deliveredMessage);
+
+					}
+					else
+						myObject.control(controlTranslator(response));
+				});
+
 			});
-
 
 		}
 
@@ -366,7 +324,7 @@ AeonSDK.prototype.deleteSubscription = function deleteSubscription(){
 		this.socket.emit('unSubscribeQueue', this.subscription);
 
 		//Delete Queue from the API
-		var url = this.rest_server_endpoint+'/subscribe/'+this.subID;
+		var url = '//'+this.rest_server_endpoint+'/subscribe/'+this.subID;
 
 		doHTTPRequest(url, 'DELETE', this.subscription);
 
