@@ -78,8 +78,8 @@ angular.module('AEON.configuration',[])
 		/*         LIVE DEMO CONFIGURATION        */
 		/******************************************/
 
-        LIVE_DEMO_PUBKEY:"076589a5-b8c9-4cec-ae74-062efa34520b",
-        LIVE_DEMO_SUBKEY:"87de2198-0904-4733-a7d4-85aebef839b9",
+        LIVE_DEMO_PUBURL:"https://localhost:3000/publish/e176d2ca-f639-4527-b3a0-664a44f0755d",
+        LIVE_DEMO_SUBURL:"https://localhost:3000/subscribe/6b97e1fc-792f-4434-bde6-d5bd0a7cd826",
 
 
         	/******************************************/
