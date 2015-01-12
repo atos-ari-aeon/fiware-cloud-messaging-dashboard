@@ -42,10 +42,6 @@ angular.module('AEON.configuration',[])
 		// Note - AEON_HOST: Introduce just the domain without the 'http://'
 		AEON_HOST: 'localhost',
 		AEON_PORT: '3000',
-		AEON_GUI_HOST: 'localhost',
-		AEON_GUI_PORT: '8000',
-		SUBSCRIPTION_HOST:'localhost',
-		SUBSCRIPTION_PORT:'7789',
 
 
 		/******************************************/
@@ -88,17 +84,17 @@ angular.module('AEON.configuration',[])
 		QUICK_START:[
 			{
 				language:'Java',
-				href:'/public/downloads/AeonSDK-Java_0.2.0.tgz',
+				href:'/public/downloads/AeonSDK-Java_0.2.1.tgz',
 				example: '/public/doc/html/quickstart/java.html'
 			},
 			{
 				language:'Javascript',
-				href:'/public/downloads/AeonSDK-Javascript_0.2.0.tgz',
+				href:'/public/downloads/AeonSDK-Javascript_0.2.1.tgz',
 				example: '/public/doc/html/quickstart/javascript.html'
 			},
 			{
 				language:'Node JS',
-				href:'/public/downloads/AeonSDK-nodejs_0.2.0.tgz',
+				href:'/public/downloads/AeonSDK-nodejs_0.2.1.tgz',
 				example: '/public/doc/html/quickstart/nodejs.html'
 			}
 		],
