@@ -84,17 +84,17 @@ angular.module('AEON.configuration',[])
 		QUICK_START:[
 			{
 				language:'Java',
-				href:'/public/downloads/AeonSDK-Java_0.2.1.tgz',
+				href:'http://gitlab.atosresearch.eu/ari/aeon-sdk/raw/master/SDK/releases/java/AeonSDK-Java_0.2.1.tgz',
 				example: '/public/doc/html/quickstart/java.html'
 			},
 			{
 				language:'Javascript',
-				href:'/public/downloads/AeonSDK-Javascript_0.2.1.tgz',
+				href:'http://gitlab.atosresearch.eu/ari/aeon-sdk/raw/master/SDK/releases/javascript/AeonSDK-Javascript_0.2.1.tgz',
 				example: '/public/doc/html/quickstart/javascript.html'
 			},
 			{
 				language:'Node JS',
-				href:'/public/downloads/AeonSDK-nodejs_0.2.1.tgz',
+				href:'http://gitlab.atosresearch.eu/ari/aeon-sdk/raw/master/SDK/releases/nodejs/AeonSDK-nodejs_0.2.1.tgz',
 				example: '/public/doc/html/quickstart/nodejs.html'
 			}
 		],

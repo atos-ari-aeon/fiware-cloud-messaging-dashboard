@@ -194,7 +194,7 @@ function loginCtrl($rootScope, $scope, $location, Cookies, $cookieStore, Authent
 
     $scope.quickStart = config.QUICK_START;
     for(var i = 0; i < $scope.quickStart.length; i++){
-        $scope.quickStart[i].href = '//'+config.AEON_HOST+':'+config.AEON_PORT+$scope.quickStart[i].href;
+        $scope.quickStart[i].href = $scope.quickStart[i].href;
         $scope.quickStart[i].example = '//'+config.AEON_HOST+':'+config.AEON_PORT+$scope.quickStart[i].example;
     }
 
