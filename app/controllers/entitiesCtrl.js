@@ -383,7 +383,7 @@ function entitiesCtrl($rootScope,$scope, Entity, Channel, $document, config, Aut
 						//retrieve the channels after deletion
 						Channel.getChannels($scope.entityId).then(function(data){
 							if(data.code == 200){
-								selectedEntity.channels = data.result;
+								$scope.entity.channels = data.result;
 							} 
 						});
 						disableEntityAlerts(selectedEntity, 5000);	
