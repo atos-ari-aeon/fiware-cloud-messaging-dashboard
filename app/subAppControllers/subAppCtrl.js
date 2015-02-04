@@ -308,7 +308,7 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
         };
 
         //Instantiates the AEON SDK
-        if($rootScope.sdk[index] == undefined || $scope.badMode ){		
+        if($rootScope.sdk[index] == null || $rootScope.sdk[index] == undefined || $scope.badMode ){		
 
             $rootScope.sdk[index] = new AeonSDK($rootScope.subscriptionURL[index].subURL, data);
         }		
