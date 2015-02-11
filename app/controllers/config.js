@@ -32,7 +32,7 @@ angular.module('AEON.configuration',[])
 		/******************************************/
 		/*            Global Config               */
 		/******************************************/
-        RECAPTCHA_PUBLIC_KEY: '6LfpRe4SAAAAAK55U_PfaYxvogR-jHGRMJQp8ArW',
+        RECAPTCHA_PUBLIC_KEY: '',
 		COOKIE_NAME: 'aeon.sid',
 		SESSION_EXPIRE_DAYS: 60,
 
@@ -74,8 +74,8 @@ angular.module('AEON.configuration',[])
 		/*         LIVE DEMO CONFIGURATION        */
 		/******************************************/
 
-        LIVE_DEMO_PUBURL:"https://localhost:3000/publish/e176d2ca-f639-4527-b3a0-664a44f0755d",
-        LIVE_DEMO_SUBURL:"https://localhost:3000/subscribe/6b97e1fc-792f-4434-bde6-d5bd0a7cd826",
+        LIVE_DEMO_PUBURL:"",
+        LIVE_DEMO_SUBURL:"",
 
 
         	/******************************************/

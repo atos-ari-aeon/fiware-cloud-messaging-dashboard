@@ -31,7 +31,7 @@
 module.exports = {}
 
 module.exports.AEON_GUI_HOST = 'localhost';
-module.exports.AEON_GUI_PORT = '9999';
-module.exports.SSL = true;
+module.exports.AEON_GUI_PORT = '8000';
+module.exports.SSL = false;
 module.exports.key = 'cert/key.pem'; //only if ssl enabled
 module.exports.cert = 'cert/cert.pem'; //only if ssl enabled
