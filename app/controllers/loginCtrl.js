@@ -655,7 +655,7 @@ function mapCtrl($scope, $rootScope, config, Cookies){
         if(data == undefined){			
             generateSubscription(function(data){
                 subscriptionData = data;
-                subUrl = "https://localhost:3000/subscriber/6b97e1fc-792f-4434-bde6-d5bd0a7cd826"
+                
                 Cookies.setCookie('aeon_subscription', Base64.encode(JSON.stringify(subscriptionData))).then(function(){
                     sdkSub = new AeonSDK(subUrl, subscriptionData);
 
