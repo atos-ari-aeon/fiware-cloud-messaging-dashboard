@@ -260,6 +260,7 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
             case 250:
             case 251:
             case 252:
+            case 253:
             case 450:				
                 $scope.controlReceivedMessage[index] = message.msg;
                 break;

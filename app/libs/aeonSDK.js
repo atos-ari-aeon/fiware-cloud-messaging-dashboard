@@ -87,6 +87,12 @@ UNSUBSCRIBED.error = false;
 UNSUBSCRIBED.code = 252;
 UNSUBSCRIBED.msg = "You have been unsubscribed.";
 
+var SUBSCRIPTION_NOT_EXIST = {};
+SUBSCRIPTION_NOT_EXIST.error = false;
+SUBSCRIPTION_NOT_EXIST.code = 253;
+SUBSCRIPTION_NOT_EXIST.msg = "The subscription does not exist.";
+
+
 //function to manage errors
 function controlTranslator(message) {
 
@@ -96,6 +102,10 @@ function controlTranslator(message) {
         code = message.code;
 
         switch (code) {
+             case 100:
+                return SDK_PUB_MODE;
+            case 101:
+                return SDK_SUB_MODE;
             case 102:
                 return INFRASTRUCTURE_UP;
             case 103:
@@ -114,12 +124,13 @@ function controlTranslator(message) {
                 return NOT_SUBSCRIBED;
             case 450:
                 return UNSUBSCRIBED;
+            case 408:
+                return SUBSCRIPTION_NOT_EXIST;
 
         }
-
         return UNKNWON_ERROR;
+
     } catch (e) {
-        console.log(e);
         return UNKNWON_ERROR;
     }
 }
@@ -324,16 +335,23 @@ AeonSDK.prototype.continueSubscription = function continueSubscription() {
 
 AeonSDK.prototype.deleteSubscription = function deleteSubscription() {
 
-    if (this.mode == 'subscribe') {
+  if (this.mode == 'subscribe') {
         this.socket.emit('unSubscribeQueue', this.subscription);
 
         //Delete Queue from the API
         var url = this.rest_server_endpoint + '/subscribe/' + this.subID;
 
-        doHTTPRequest(url, 'DELETE', this.subscription);
+        var myObject = this;
 
-    } else
+        doHTTPRequest(url, 'DELETE', this.subscription,function (response) {
+
+          myObject.control(controlTranslator(response));
+
+        });
+
+    } else {
         this.control(controlTranslator(SDK_PUB_MODE));
+    }
 }
 
 AeonSDK.prototype.publish = function publish(data, control) {
@@ -379,7 +397,6 @@ var doHTTPRequest = function doHTTPRequest(url, method, data, next) {
 
         http.send(null);
 
-
     }
 
     if (method == 'POST' || method == 'DELETE') {
@@ -389,9 +406,17 @@ var doHTTPRequest = function doHTTPRequest(url, method, data, next) {
         http.setRequestHeader("Content-Type", "application/json");
 
         http.onreadystatechange = function () {
-            if (http.readyState == 4 && http.status == 200) {
-                if (method == "POST")
+
+          if (http.readyState == 4 && http.status == 200) {
+
+                if (method == "POST"){
                     next(JSON.parse(http.responseText));
+                }
+
+                if (method == "DELETE"){
+                   next(JSON.parse(http.responseText));
+                }
+
             }
             if (http.readyState == 4 && http.status != 200) {
                 next(UNKNWON_ERROR);
