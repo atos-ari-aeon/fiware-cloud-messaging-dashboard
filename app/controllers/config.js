@@ -32,7 +32,7 @@ angular.module('AEON.configuration',[])
 		/******************************************/
 		/*            Global Config               */
 		/******************************************/
-        RECAPTCHA_PUBLIC_KEY: '',
+        RECAPTCHA_PUBLIC_KEY: '6LfpRe4SAAAAAK55U_PfaYxvogR-jHGRMJQp8ArW',
 		COOKIE_NAME: 'aeon.sid',
 		SESSION_EXPIRE_DAYS: 60,
 
@@ -40,7 +40,7 @@ angular.module('AEON.configuration',[])
 		/*                Config                  */
 		/******************************************/
 		// Note - AEON_HOST: Introduce just the domain without the 'http://'
-		AEON_HOST: 'localhost',
+		AEON_HOST: '192.168.59.103',
 		AEON_PORT: '3000',
 
 
