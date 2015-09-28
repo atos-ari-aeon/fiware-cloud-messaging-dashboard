@@ -1,6 +1,6 @@
 /**
 		Copyright (C) 2014 ATOS
- 
+
 		This file is part of AEON.
 
 		This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@
 
 		You should have received a copy of the GNU General Public License
 		along with this program.  If not, see <http://www.gnu.org/licenses/>.
-	
+
 		Authors: Javier García Hernández (javier.garcia@atos.net)
 						 Baris Kara (baris.kara@atos.net)
 
@@ -35,7 +35,7 @@ app.factory('Authentication', function ($http, $q, $location, $cookies, $cookieS
         isLoggedIn: function () {
             var deferred = $q.defer();
             //GET
-            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/users/user", {
+            $http.get("//" + $location.host() + ":" + config.AEON_PORT + "/users/user", {
                 withCredentials: true
             }).success(function (responseData) {
                 deferred.resolve(responseData);
@@ -55,7 +55,7 @@ app.factory('Authentication', function ($http, $q, $location, $cookies, $cookieS
             $http.defaults.headers.post['Set-Cookie'] = '';
 
             //POST
-            $http.post("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/login", user, {
+            $http.post("//" + $location.host() + ":" + config.AEON_PORT + "/login", user, {
                 withCredentials: true
             }).success(function (responseData, status, headers, config) {
 
@@ -72,7 +72,7 @@ app.factory('Authentication', function ($http, $q, $location, $cookies, $cookieS
         //Logout
         logout: function () {
             var deferred = $q.defer();
-            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/logout", {
+            $http.get("//" + $location.host() + ":" + config.AEON_PORT + "/logout", {
                 withCredentials: true
             }).success(function (responseData, status, headers, config) {
                 deferred.resolve(responseData);
@@ -128,7 +128,7 @@ app.factory('Cookies', function ($q, $timeout) {
 });
 
 //Services for the user management
-app.factory('Users', function ($http, $q, $rootScope, config) {
+app.factory('Users', function ($http, $q, $rootScope, config, $location) {
     return {
         //List the users
         getUsers: function () {
@@ -138,7 +138,7 @@ app.factory('Users', function ($http, $q, $rootScope, config) {
             $http.defaults.headers.post['Content-Type'] = 'application/json';
 
             //GET
-            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/users/", {
+            $http.get("//" + $location.host() + ":" + config.AEON_PORT + "/users/", {
                 withCredentials: true
             }).success(function (responseData) {
 
@@ -157,7 +157,7 @@ app.factory('Users', function ($http, $q, $rootScope, config) {
             var deferred = $q.defer();
             //Set up the headers
             $http.defaults.headers.post['Content-Type'] = 'application/json';
-            $http.post("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/users", user).success(function (responseData, status) {
+            $http.post("//" + $location.host() + ":" + config.AEON_PORT + "/users", user).success(function (responseData, status) {
                 responseData.httpStatus = status;
                 deferred.resolve(responseData);
             }).error(function (responseData, status) {
@@ -174,7 +174,7 @@ app.factory('Users', function ($http, $q, $rootScope, config) {
             $http.defaults.headers.post['Content-Type'] = 'application/json';
 
             //GET
-            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/users/" + id, {
+            $http.get("//" + $location.host() + ":" + config.AEON_PORT + "/users/" + id, {
                 withCredentials: true
             }).success(function (responseData) {
 
@@ -191,7 +191,7 @@ app.factory('Users', function ($http, $q, $rootScope, config) {
         //Resets user password
         resetPassword: function (userId) {
             var deferred = $q.defer();
-            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/users/" + userId + "/rememberPassword").success(function (responseData, status) {
+            $http.get("//" + $location.host() + ":" + config.AEON_PORT + "/users/" + userId + "/rememberPassword").success(function (responseData, status) {
                 responseData.httpStatus = status;
                 deferred.resolve(responseData);
             }).error(function (responseData, status) {
@@ -205,7 +205,7 @@ app.factory('Users', function ($http, $q, $rootScope, config) {
             var deferred = $q.defer();
             //Set up the headers
             $http.defaults.headers.post['Content-Type'] = 'application/json';
-            $http.put("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/users/" + user.username + "/rememberPassword/" + tempCode, user).success(function (responseData, status) {
+            $http.put("//" + $location.host() + ":" + config.AEON_PORT + "/users/" + user.username + "/rememberPassword/" + tempCode, user).success(function (responseData, status) {
                 responseData.httpStatus = status;
                 deferred.resolve(responseData);
             }).error(function (responseData, status) {
@@ -222,7 +222,7 @@ app.factory('Users', function ($http, $q, $rootScope, config) {
             $http.defaults.headers.post['Content-Type'] = 'application/json';
 
             //PUT
-            $http.put("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/users/" + username + "/updatePassword", user, {
+            $http.put("//" + $location.host() + ":" + config.AEON_PORT + "/users/" + username + "/updatePassword", user, {
                 withCredentials: true
             }).success(function (responseData) {
 
@@ -241,7 +241,7 @@ app.factory('Users', function ($http, $q, $rootScope, config) {
 
 
 //Services for the entities management
-app.factory('Entity', function ($http, $q, $rootScope, config) {
+app.factory('Entity', function ($http, $q, $rootScope, config, $location) {
     return {
         //List of entities
         getEntities: function () {
@@ -251,7 +251,7 @@ app.factory('Entity', function ($http, $q, $rootScope, config) {
             $http.defaults.headers.post['Content-Type'] = 'application/json';
 
             //GET
-            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/", {
+            $http.get("//" + $location.host() + ":" + config.AEON_PORT + "/entities/", {
                 withCredentials: true
             }).success(function (responseData) {
 
@@ -273,7 +273,7 @@ app.factory('Entity', function ($http, $q, $rootScope, config) {
             $http.defaults.headers.post['Content-Type'] = 'application/json';
 
             //POST
-            $http.post("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities", entity, {
+            $http.post("//" + $location.host() + ":" + config.AEON_PORT + "/entities", entity, {
                 withCredentials: true
             }).success(function (responseData) {
                 deferred.resolve(responseData);
@@ -294,7 +294,7 @@ app.factory('Entity', function ($http, $q, $rootScope, config) {
             $http.defaults.headers.post['Content-Type'] = 'application/json';
 
             //GET
-            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/" + id, {
+            $http.get("//" + $location.host() + ":" + config.AEON_PORT + "/entities/" + id, {
                 withCredentials: true
             }).success(function (responseData) {
                 deferred.resolve(responseData);
@@ -313,7 +313,7 @@ app.factory('Entity', function ($http, $q, $rootScope, config) {
             //Set up the headers
             $http.defaults.headers.post['Content-Type'] = 'application/json';
             //PUT
-            $http.put("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/" + entity._id, entity, {
+            $http.put("//" + $location.host() + ":" + config.AEON_PORT + "/entities/" + entity._id, entity, {
                 withCredentials: true
             }).success(function (responseData) {
                 deferred.resolve(responseData);
@@ -329,15 +329,15 @@ app.factory('Entity', function ($http, $q, $rootScope, config) {
             //Set up the headers
             $http.defaults.headers.post['Content-Type'] = 'application/json';
             //DELETE
-            // $http.delete("//"+config.AEON_HOST+":"+config.AEON_PORT+"/entities/"+entity._id, {withCredentials:true}).success(function(responseData){
+            // $http.delete("//"+$location.host()+":"+config.AEON_PORT+"/entities/"+entity._id, {withCredentials:true}).success(function(responseData){
             // 	deferred.resolve(responseData);
-            // }).error(function(responseData){						
+            // }).error(function(responseData){
             // 	deferred.reject(responseData);
             // });
 
             $http({
                 method: 'DELETE',
-                url: "//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/" + entity._id,
+                url: "//" + $location.host() + ":" + config.AEON_PORT + "/entities/" + entity._id,
                 withCredentials: true
             }).success(function (responseData) {
                 deferred.resolve(responseData);
@@ -353,7 +353,7 @@ app.factory('Entity', function ($http, $q, $rootScope, config) {
 })
 
 //Services for the channels
-app.factory('Channel', function ($http, $q, $rootScope, config) {
+app.factory('Channel', function ($http, $q, $rootScope, config, $location) {
     return {
         //List of channels
         getChannels: function (entity_id) {
@@ -363,7 +363,7 @@ app.factory('Channel', function ($http, $q, $rootScope, config) {
             $http.defaults.headers.post['Content-Type'] = 'application/json';
 
             //GET
-            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/" + entity_id + '/channels/', {
+            $http.get("//" + $location.host() + ":" + config.AEON_PORT + "/entities/" + entity_id + '/channels/', {
                 withCredentials: true
             }).success(function (responseData) {
 
@@ -385,7 +385,7 @@ app.factory('Channel', function ($http, $q, $rootScope, config) {
             $http.defaults.headers.post['Content-Type'] = 'application/json';
 
             //POST
-            $http.post("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/" + entity_id + "/channels/", channel, {
+            $http.post("//" + $location.host() + ":" + config.AEON_PORT + "/entities/" + entity_id + "/channels/", channel, {
                 withCredentials: true
             }).success(function (responseData) {
 
@@ -407,7 +407,7 @@ app.factory('Channel', function ($http, $q, $rootScope, config) {
             $http.defaults.headers.post['Content-Type'] = 'application/json';
 
             //GET
-            $http.get("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/" + entity_id + "/channels/" + channel_id, {
+            $http.get("//" + $location.host() + ":" + config.AEON_PORT + "/entities/" + entity_id + "/channels/" + channel_id, {
                 withCredentials: true
             }).success(function (responseData) {
 
@@ -427,7 +427,7 @@ app.factory('Channel', function ($http, $q, $rootScope, config) {
             //Set up the headers
             $http.defaults.headers.post['Content-Type'] = 'application/json';
             //PUT
-            $http.put("//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/" + entityId + "/channels/" + channel._id, channel, {
+            $http.put("//" + $location.host() + ":" + config.AEON_PORT + "/entities/" + entityId + "/channels/" + channel._id, channel, {
                 withCredentials: true
             }).success(function (responseData) {
                 deferred.resolve(responseData);
@@ -443,15 +443,15 @@ app.factory('Channel', function ($http, $q, $rootScope, config) {
             //Set up the headers
             $http.defaults.headers.post['Content-Type'] = 'application/json';
             //DELETE
-            // $http.delete("//"+config.AEON_HOST+":"+config.AEON_PORT+"/entities/"+entityId+"/channels/"+channelId, {withCredentials:true}).success(function(responseData){
+            // $http.delete("//"+$location.host()+":"+config.AEON_PORT+"/entities/"+entityId+"/channels/"+channelId, {withCredentials:true}).success(function(responseData){
             // 	deferred.resolve(responseData);
-            // }).error(function(responseData){						
+            // }).error(function(responseData){
             // 	deferred.reject(responseData);
             // });
 
             $http({
                 method: 'DELETE',
-                url: "//" + config.AEON_HOST + ":" + config.AEON_PORT + "/entities/" + entityId + "/channels/" + channelId,
+                url: "//" + $location.host() + ":" + config.AEON_PORT + "/entities/" + entityId + "/channels/" + channelId,
                 withCredentials: true
             }).success(function (responseData) {
                 deferred.resolve(responseData);
