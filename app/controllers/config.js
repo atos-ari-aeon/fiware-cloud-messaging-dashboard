@@ -102,7 +102,7 @@ angular.module('AEON.configuration',[])
 		/******************************************/
 		/*          CONTACT CONFIGURATION         */
 		/******************************************/
-		AEON_VERSION:'0.2.1',
+		AEON_VERSION:'0.2.2',
 		AEON_COPYRIGHT: 'Copyright 2014 ATOS S.A.',
 		ATOS_LOCATION: {
 			img:'img/findUs2.png',
