@@ -24,13 +24,13 @@
   Controller for the publication app
 */
 
-function publicationCtrl($scope, $rootScope){			
+function publicationCtrl($scope, $rootScope){
 
     var coordinates = {
         "latitude": "",
         "longitude" : ""
     }
-    $rootScope.codeContentJSON = JSON.stringify(coordinates,null,2); 
+    $rootScope.codeContentJSON = JSON.stringify(coordinates,null,2);
 
     //define the menu bar tabs
     $scope.tabs = [
@@ -66,19 +66,19 @@ function publicationCtrl($scope, $rootScope){
         //     coordsEmpty: false,
         //     serverDown: false,
         //     tab:''
-        // }	
+        // }
 
-    ]	
+    ]
 
     //Determines if the 'Find me' button has to be shown
-    $scope.showFindMeButton = function(index){		
+    $scope.showFindMeButton = function(index){
         if($scope.tabs[index].showFindme)
             return true;
         else return false;
     }
 
     //Determines if the 'Random' button has to be shown
-    $scope.showRandomButton = function(index){		
+    $scope.showRandomButton = function(index){
         if($scope.tabs[index].showRandom)
             return true;
         else return false;
@@ -92,17 +92,17 @@ function publicationCtrl($scope, $rootScope){
     }
 
     //Publish the coordinates
-    $scope.publish = function(index){		
+    $scope.publish = function(index){
 
         $rootScope.selectedIndex = index;
 
-        //Controls that the coordinates are filled.		
-        if($rootScope.publicationURL == undefined || $rootScope.publicationURL == ''){	
+        //Controls that the coordinates are filled.
+        if($rootScope.publicationURL == undefined || $rootScope.publicationURL == ''){
             $rootScope.pubUrlEmpty = true;
             return;
         }
 
-        if($rootScope.startButtonDisabled == false){	
+        if($rootScope.startButtonDisabled == false){
             $rootScope.notAttached = true;
             return;
         }
@@ -121,16 +121,16 @@ function publicationCtrl($scope, $rootScope){
 
         //Parse to float the values of the coordinates
         coordinates.latitude = parseFloat($scope.tabs[index].latitude);
-        coordinates.longitude = parseFloat($scope.tabs[index].longitude);			
+        coordinates.longitude = parseFloat($scope.tabs[index].longitude);
 
         //Publication;
         $rootScope.sdk.publish(coordinates, function(message){
 
-            if(message.code == 0)			 	
-                $scope.tabs[index].serverDown = true;			 				 
+            if(message.code == 0)
+                $scope.tabs[index].serverDown = true;
             else{
                 $rootScope.showMessage = true;
-                $scope.tabs[index].serverDown = false;			
+                $scope.tabs[index].serverDown = false;
             }
 
             $scope.getRandomPoint(0);
@@ -141,17 +141,17 @@ function publicationCtrl($scope, $rootScope){
 
         var tmp = JSON.stringify(coordinates).split(',');
         $rootScope.sentMessage = '';
-        for(var i=0;i< tmp.length-1; i++)			
+        for(var i=0;i< tmp.length-1; i++)
             $rootScope.sentMessage += (tmp[i]+', ');
-        $rootScope.sentMessage += (tmp[i]);		
+        $rootScope.sentMessage += (tmp[i]);
 
-        $rootScope.codeContentJSON = JSON.stringify(coordinates,null,2); 
+        $rootScope.codeContentJSON = JSON.stringify(coordinates,null,2);
         console.log($rootScope.codeContentJSON);
 
     }
 
     //Gets the current location
-    $scope.findme = function(index){		
+    $scope.findme = function(index){
 
         $scope.geolocationAvailable = navigator.geolocation ? true : false;
 
@@ -164,7 +164,7 @@ function publicationCtrl($scope, $rootScope){
     }
 
     function getRandomInRange(from, to, fixed) {
-        return (Math.random() * (to - from) + from).toFixed(fixed) * 1;	    
+        return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
     }
 
     //Gets a random point
@@ -190,18 +190,18 @@ function publicationCtrl($scope, $rootScope){
     $scope.getRandomPoint(0);
 
     //Shows an alert message if the coordinates are not filled
-    $scope.showCoordsAlert = function(index){		
+    $scope.showCoordsAlert = function(index){
 
-        return $scope.tabs[index].coordsEmpty;		
+        return $scope.tabs[index].coordsEmpty;
     }
 
-    $scope.showServerDown = function(index){		
+    $scope.showServerDown = function(index){
 
-        return $scope.tabs[index].serverDown;		
+        return $scope.tabs[index].serverDown;
     }
 
     //Watch the change of the tabs
-    $scope.$watch('tabs',function(){	
+    $scope.$watch('tabs',function(){
 
         if($scope.selectedIndex != undefined){
 
@@ -266,9 +266,9 @@ function configCtrl($scope, $rootScope, Entity, Channel, config, $location){
 
     $scope.pathSDK = '<script src="path/to/aeonSDK.js"></script>';
     $scope.pathSocketIO = '<script src="path/to/socket.io.js"></script>';
-    $scope.codeSnippet =["var sdk = new AeonSDK(pubUrl);","sdk.publish(data, controlFn);"];	
+    $scope.codeSnippet =["var sdk = new AeonSDK(pubUrl);","sdk.publish(data, controlFn);"];
 
-    $scope.codeContentHTML = $scope.pathSDK + '\n' + $scope.pathSocketIO ; 
+    $scope.codeContentHTML = $scope.pathSDK + '\n' + $scope.pathSocketIO ;
     $scope.codeContentJS =  $scope.codeSnippet[0] + '\n\n' + $scope.codeSnippet[1];
 
     Entity.getEntities().then(function ok(data){
@@ -281,9 +281,9 @@ function configCtrl($scope, $rootScope, Entity, Channel, config, $location){
                     channelName = channels[j].channelname;
                     channelPubURL = channels[j].pubID;
                     $scope.channelsAvailables.push({ "name": channelName,
-                                                    "pubURL": "//" + config.AEON_HOST+":"+config.AEON_PORT+"/publish/" + channelPubURL,
+                                                    "pubURL": "//" + $location.host()+":"+config.AEON_PORT+"/publish/" + channelPubURL,
                                                     "shortPubURL": "//.../subscribe/"  + channelPubURL
-                                                    //                                                    + channelPubURL.substring(0, 8) +"..." 
+                                                    //                                                    + channelPubURL.substring(0, 8) +"..."
                                                     //                                                    + channelPubURL.substring(30, 35) + "..."
                                                    });
 
@@ -297,58 +297,58 @@ function configCtrl($scope, $rootScope, Entity, Channel, config, $location){
         }
 
     }, function error(data){
-        $scope.pubURLLabel = false;	
-        $scope.noWriteable = false;	
+        $scope.pubURLLabel = false;
+        $scope.noWriteable = false;
         $rootScope.startButtonDisabled = true;
         $scope.stopButtonDisabled = true;
         $scope.channelSelectorDisabled = true;
-        $rootScope.notReachable = true;	
+        $rootScope.notReachable = true;
         $rootScope.showMessage = false;
 
     });
 
 
-    //Attach to the publication url 
+    //Attach to the publication url
     $scope.attachURL = function(){
 
-        $scope.pubURLLabel = true;	
-        $scope.noWriteable = true;	
+        $scope.pubURLLabel = true;
+        $scope.noWriteable = true;
         $rootScope.startButtonDisabled = true;
         $scope.stopButtonDisabled = false;
         $scope.channelSelectorDisabled = true;
         $rootScope.notAttached = false;
 
-        $rootScope.publicationURL = $scope.publicationURL.pubURL;	
+        $rootScope.publicationURL = $scope.publicationURL.pubURL;
 
         //Instantiate the SDK
-        $rootScope.sdk = new AeonSDK($rootScope.publicationURL);				
+        $rootScope.sdk = new AeonSDK($rootScope.publicationURL);
 
         if($rootScope.publicationURL.indexOf("publish")!=-1){
-            $scope.pubURLLabel = true;	
-            $scope.noWriteable = true;	
+            $scope.pubURLLabel = true;
+            $scope.noWriteable = true;
             $rootScope.startButtonDisabled = true;
             $scope.stopButtonDisabled = false;
             $rootScope.notAttached = false;
             //$rootScope.showMessage = true;
         }
-        else{				
-            $scope.pubURLLabel = false;	
-            $scope.noWriteable = false;	
+        else{
+            $scope.pubURLLabel = false;
+            $scope.noWriteable = false;
             $rootScope.startButtonDisabled = false;
             $scope.stopButtonDisabled = true;
-            $rootScope.notAttached = true;	
+            $rootScope.notAttached = true;
             $rootScope.showMessage = false;
         }
     }
 
-    //Dettach to the publication url 
+    //Dettach to the publication url
     $scope.dettachURL = function(){
 
         $scope.pubURLLabel = false;
-        $scope.noWriteable = false;	
+        $scope.noWriteable = false;
         $rootScope.startButtonDisabled = false;
         $scope.channelSelectorDisabled = false;
-        $scope.stopButtonDisabled = true;	
+        $scope.stopButtonDisabled = true;
 
         $rootScope.pubURLLabel = false;
 
@@ -379,12 +379,12 @@ function configCtrl($scope, $rootScope, Entity, Channel, config, $location){
         }
         catch(err){
 
-        }				
+        }
     }
 
-    $scope.$watch('publicationURL',function(){	
+    $scope.$watch('publicationURL',function(){
         if ($scope.publicationURL == undefined){
-            $rootScope.publicationURL = null   
+            $rootScope.publicationURL = null
         } else {
             $rootScope.pubUrlEmpty = false;
             $rootScope.publicationURL = $scope.publicationURL.pubURL;

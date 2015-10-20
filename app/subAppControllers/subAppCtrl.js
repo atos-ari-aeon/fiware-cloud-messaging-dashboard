@@ -47,7 +47,7 @@ function mapCtrl($scope, $rootScope, config){
 /*
 	Controller for the menu bar
 */
-function configCtrl($scope, $rootScope, Entity, Channel, config){
+function configCtrl($scope, $rootScope, $location, Entity, Channel, config){
 
     $scope.subscriptionFields = [];
     $rootScope.subscriptionURL = [];
@@ -120,7 +120,7 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
                     channelName = channels[j].channelname;
                     channelSubURL = channels[j].subID;
                     $scope.channelsAvailables.push({ "name": channelName,
-                                                    "subURL": "//" + config.AEON_HOST+":"+config.AEON_PORT+"/subscribe/" + channelSubURL,
+                                                    "subURL": "//" + $location.host()+":"+config.AEON_PORT+"/subscribe/" + channelSubURL,
                                                     "shortSubURL": "//.../subscribe/" + channelSubURL
                                                     //                                                    + channelSubURL.substring(0, 8) +"..." 
                                                     //                                                    + channelSubURL.substring(30, 35) + "..."
