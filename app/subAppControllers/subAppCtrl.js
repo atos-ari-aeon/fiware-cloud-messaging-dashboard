@@ -27,7 +27,7 @@
 
 function mapCtrl($scope, $rootScope, config){
 
-    // google.maps.visualRefresh = true;	
+    // google.maps.visualRefresh = true;
     function initialize() {
         var mapOptions = {
             center: new google.maps.LatLng(40.435510, -3.700371),
@@ -40,14 +40,14 @@ function mapCtrl($scope, $rootScope, config){
         $rootScope.map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
     }
 
-    google.maps.event.addDomListener(window, 'load', initialize);	
+    google.maps.event.addDomListener(window, 'load', initialize);
 
 }
 
 /*
 	Controller for the menu bar
 */
-function configCtrl($scope, $rootScope, Entity, Channel, config){
+function configCtrl($scope, $rootScope, $location, Entity, Channel, config){
 
     $scope.subscriptionFields = [];
     $rootScope.subscriptionURL = [];
@@ -64,13 +64,13 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
     $scope.notAttached = [];
     $scope.messageColor = [];
 
-    $scope.showMessage = false;	
+    $scope.showMessage = false;
 
     var coordinates = {
         "latitude": "",
         "longitude" : ""
     }
-    $scope.codeContentJSON = JSON.stringify(coordinates,null,2); 
+    $scope.codeContentJSON = JSON.stringify(coordinates,null,2);
     $scope.badMode = false;
 
     $scope.channelsAvailables = [];
@@ -106,7 +106,7 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
     $scope.pathSocketIO = '<script src="path/to/socket.io.js"></script>';
     $scope.codeSnippet =["var sdk = new AeonSDK(subUrl, \n           subscription);","sdk.subscribe(msgCallback);"];
 
-    $scope.codeContentHTML = $scope.pathSDK + '\n' + $scope.pathSocketIO ; 
+    $scope.codeContentHTML = $scope.pathSDK + '\n' + $scope.pathSocketIO ;
     $scope.codeContentJS =  $scope.codeSnippet[0] + '\n\n' + $scope.codeSnippet[1];
 
 
@@ -120,9 +120,9 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
                     channelName = channels[j].channelname;
                     channelSubURL = channels[j].subID;
                     $scope.channelsAvailables.push({ "name": channelName,
-                                                    "subURL": "//" + config.AEON_HOST+":"+config.AEON_PORT+"/subscribe/" + channelSubURL,
+                                                    "subURL": "//" + $location.host()+":"+config.AEON_PORT+"/subscribe/" + channelSubURL,
                                                     "shortSubURL": "//.../subscribe/" + channelSubURL
-                                                    //                                                    + channelSubURL.substring(0, 8) +"..." 
+                                                    //                                                    + channelSubURL.substring(0, 8) +"..."
                                                     //                                                    + channelSubURL.substring(30, 35) + "..."
                                                    });
 
@@ -167,7 +167,7 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
     function setDataToMap(message, channel){
 
          $scope.showMessage = true;
-        
+
         //Message for the snippet
         var coordinates = {
             "latitude": message.latitude,
@@ -175,17 +175,17 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
         }
 
         //Message for the snippet
-        //$scope.receivedMessage = '';	
+        //$scope.receivedMessage = '';
         //        var tmp = JSON.stringify(coordinates).split(',');
-        //        for(var i=0;i< tmp.length-1; i++)			
-        //            $scope.receivedMessage += (tmp[i]+', ');	
-        //        $scope.receivedMessage += (tmp[i]);	
-        $scope.codeContentJSON = JSON.stringify(coordinates,null,2); 
-        //$scope.codeContentJSON = coordinates; 
+        //        for(var i=0;i< tmp.length-1; i++)
+        //            $scope.receivedMessage += (tmp[i]+', ');
+        //        $scope.receivedMessage += (tmp[i]);
+        $scope.codeContentJSON = JSON.stringify(coordinates,null,2);
+        //$scope.codeContentJSON = coordinates;
         //Add marker to the map with the received coordinates
         //$rootScope.map.markers.push(coordinates);
 
-        var content = '<div id="content">'+				      
+        var content = '<div id="content">'+
             '<h3>Position</h3>'+
             '<div id="bodyContent">'+
             '<p>'+message.longitude+" , "+message.latitude+'</p>'+
@@ -211,7 +211,7 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
             position: new google.maps.LatLng(message.latitude, message.longitude)
         });
 
-        google.maps.event.addListener(marker, 'click', function() {			
+        google.maps.event.addListener(marker, 'click', function() {
             if(infowindow)
                 infowindow.close();
 
@@ -225,7 +225,7 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
         //Measures the time spent in receiving the message
         if("clientDate" in message){
 
-            var now = moment();				
+            var now = moment();
 
             var clientDate = moment(message.clientDate,"D/M/YYYY HH:mm:ss:SSS ZZ");
 
@@ -233,18 +233,18 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
 
         }
 
-        
+
         //Re-render the map
         $scope.$apply();
-       
+
 
     }
 
     function setMessage(message, index){
         switch(message.code){
                 //Sets the message in all the boxes
-            case 0:			
-            case 3:			            							
+            case 0:
+            case 3:
                 for(var i = 0; i < $scope.controlReceivedMessage.length; i++)
                     $scope.controlReceivedMessage[i] = message.msg;
                 break;
@@ -261,10 +261,10 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
             case 251:
             case 252:
             case 253:
-            case 450:				
+            case 450:
                 $scope.controlReceivedMessage[index] = message.msg;
                 break;
-        }		
+        }
 
         if(!$scope.showControlMessage[index])
             $scope.showControlMessage[index] = true;
@@ -279,7 +279,7 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
         }
         else
             $scope.messageColor[index] = "Blue";
-    }	
+    }
 
     //Start listening the subscription url
     $scope.submitURL = function(index){
@@ -292,13 +292,13 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
             return;
         } else {
             $scope.notAttached[index] = false;
-        }    
+        }
 
 
-        $scope.startSub[index] = true;	
+        $scope.startSub[index] = true;
         $scope.startButtonShown[index] = false;
         $scope.pauseButtonShown[index] = true;
-        $scope.stopButtonDisabled[index] = false;		
+        $scope.stopButtonDisabled[index] = false;
         $scope.channelSelectorDisabled[index] = true;
 
         $scope.subscriptionURL[index] = $scope.subscriptionURL[index];
@@ -309,24 +309,24 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
         };
 
         //Instantiates the AEON SDK
-        if($rootScope.sdk[index] == null || $rootScope.sdk[index] == undefined || $scope.badMode ){		
+        if($rootScope.sdk[index] == null || $rootScope.sdk[index] == undefined || $scope.badMode ){
 
             $rootScope.sdk[index] = new AeonSDK($rootScope.subscriptionURL[index].subURL, data);
-        }		
+        }
 
         $rootScope.sdk[index].subscribe(function controlFn(data){
-            setDataToMap(data, index);			
+            setDataToMap(data, index);
 
-        }, function deliveriedMessage(message){	
+        }, function deliveriedMessage(message){
             setMessage(message, index);
-        });		
+        });
 
 
     }
 
     //Pauses the current subscription
-    $scope.pauseURL = function(index){	
-        $scope.selectedIndex = index;	
+    $scope.pauseURL = function(index){
+        $scope.selectedIndex = index;
         $scope.pauseButtonShown[index] = false;
         $scope.continueButtonShown[index] = true;
         $scope.channelSelectorDisabled[index] = true;
@@ -338,7 +338,7 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
     $scope.continueURL = function(index){
         $scope.selectedIndex = index;
         $scope.pauseButtonShown[index] = true;
-        $scope.continueButtonShown[index] = false;	
+        $scope.continueButtonShown[index] = false;
         $scope.channelSelectorDisabled[index] = true;
 
         $rootScope.sdk[index].continueSubscription();
@@ -351,18 +351,18 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
         $scope.startButtonShown[index] = true;
         $scope.pauseButtonShown[index] = false;
         $scope.continueButtonShown[index] = false;
-        $scope.stopButtonDisabled[index] = true;	
+        $scope.stopButtonDisabled[index] = true;
         $scope.channelSelectorDisabled[index] = false;
         $scope.subURL[index] = "";
         $rootScope.sdk[index].deleteSubscription();
 
         $rootScope.sdk[index] = null;
 
-    }	
+    }
 
 
-    $scope.addChannel = function(){	
-        var num = $scope.subscriptionFields.length;	
+    $scope.addChannel = function(){
+        var num = $scope.subscriptionFields.length;
 
         if(num < 3){
             $scope.startSub.push(false);
@@ -379,9 +379,9 @@ function configCtrl($scope, $rootScope, Entity, Channel, config){
         }
     }
 
-    $scope.removeChannel = function(){			
-        var num = $scope.subscriptionFields.length;	
-        var index = $scope.subscriptionFields.length - 1;	
+    $scope.removeChannel = function(){
+        var num = $scope.subscriptionFields.length;
+        var index = $scope.subscriptionFields.length - 1;
         if(num > 1){
             $scope.subURL[index] = "";
 
