@@ -39,7 +39,7 @@ angular.module('AEON.configuration',[])
 		/******************************************/
 		/*                Config                  */
 		/******************************************/
-		// Note - AEON_HOST: Introduce just the domain without the 'http://'
+		// Note - AEON_HOST:Introduce just the domain without the 'http://'
 		AEON_HOST: 'localhost',
 		AEON_PORT: '3000',
 
